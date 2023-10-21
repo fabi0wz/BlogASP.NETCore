@@ -21,4 +21,8 @@
     <Compile Remove="Data\Migrations\20231021145241_InitialMigration.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\DELETEAFTERRoute\ListRoutes.cshtml" />
+  </ItemGroup>
+
 </Project>

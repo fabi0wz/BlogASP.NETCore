@@ -1,18 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetBlog.Data;
 using AspNetBlog.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetBlog.Controllers
 {
     public class PostController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
 
         public PostController(ApplicationDbContext context)
         {
@@ -63,7 +68,20 @@ namespace AspNetBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(post);
+                var user = await _userManager.GetUserAsync(User); // Assuming you have UserManager configured for Identity
+
+                var Post = new Post
+                {
+                    Post_Title = post.Post_Title,
+                    Post_Content = post.Post_Content,
+                    Post_Description = post.Post_Description,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = null,
+                    CreatedBy = user,
+                    UpdatedBy = null
+                };
+                
+                _context.Add(Post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
