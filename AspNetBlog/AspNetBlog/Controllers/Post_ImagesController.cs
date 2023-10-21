@@ -2,92 +2,167 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using AspNetBlog.Data;
+using AspNetBlog.Models;
 
 namespace AspNetBlog.Controllers
 {
     public class Post_ImagesController : Controller
     {
-        // GET: Post_Images
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public Post_ImagesController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        // GET: Post_Images
+        public async Task<IActionResult> Index()
+        {
+            var applicationDbContext = _context.Post_Images.Include(p => p.Post);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Post_Images/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null || _context.Post_Images == null)
+            {
+                return NotFound();
+            }
+
+            var post_Images = await _context.Post_Images
+                .Include(p => p.Post)
+                .FirstOrDefaultAsync(m => m.Image_Id == id);
+            if (post_Images == null)
+            {
+                return NotFound();
+            }
+
+            return View(post_Images);
         }
 
         // GET: Post_Images/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
+            ViewData["Post_Id"] = new SelectList(_context.Post, "Post_Id", "Post_Id");
             return View();
         }
 
         // POST: Post_Images/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("Image_Id,Post_Id,Image_Path")] Post_Images post_Images)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                _context.Add(post_Images);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["Post_Id"] = new SelectList(_context.Post, "Post_Id", "Post_Id", post_Images.Post_Id);
+            return View(post_Images);
         }
 
         // GET: Post_Images/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null || _context.Post_Images == null)
+            {
+                return NotFound();
+            }
+
+            var post_Images = await _context.Post_Images.FindAsync(id);
+            if (post_Images == null)
+            {
+                return NotFound();
+            }
+            ViewData["Post_Id"] = new SelectList(_context.Post, "Post_Id", "Post_Id", post_Images.Post_Id);
+            return View(post_Images);
         }
 
         // POST: Post_Images/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("Image_Id,Post_Id,Image_Path")] Post_Images post_Images)
         {
-            try
+            if (id != post_Images.Image_Id)
             {
-                // TODO: Add update logic here
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(post_Images);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!Post_ImagesExists(post_Images.Image_Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["Post_Id"] = new SelectList(_context.Post, "Post_Id", "Post_Id", post_Images.Post_Id);
+            return View(post_Images);
         }
 
         // GET: Post_Images/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null || _context.Post_Images == null)
+            {
+                return NotFound();
+            }
+
+            var post_Images = await _context.Post_Images
+                .Include(p => p.Post)
+                .FirstOrDefaultAsync(m => m.Image_Id == id);
+            if (post_Images == null)
+            {
+                return NotFound();
+            }
+
+            return View(post_Images);
         }
 
         // POST: Post_Images/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            if (_context.Post_Images == null)
             {
-                // TODO: Add delete logic here
+                return Problem("Entity set 'ApplicationDbContext.Post_Images'  is null.");
+            }
+            var post_Images = await _context.Post_Images.FindAsync(id);
+            if (post_Images != null)
+            {
+                _context.Post_Images.Remove(post_Images);
+            }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        private bool Post_ImagesExists(int id)
+        {
+          return (_context.Post_Images?.Any(e => e.Image_Id == id)).GetValueOrDefault();
         }
     }
 }

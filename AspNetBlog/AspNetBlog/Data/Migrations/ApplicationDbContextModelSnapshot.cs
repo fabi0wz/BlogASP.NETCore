@@ -22,23 +22,6 @@ namespace AspNetBlog.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AspNetBlog.Models.Country", b =>
-                {
-                    b.Property<int>("Country_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Country_Id"));
-
-                    b.Property<string>("Country_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Country_Id");
-
-                    b.ToTable("Country");
-                });
-
             modelBuilder.Entity("AspNetBlog.Models.Post", b =>
                 {
                     b.Property<int>("Post_Id")
