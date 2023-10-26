@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AspNetBlog.Data.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:AspNetBlog/AspNetBlog/Data/Migrations/20231023204134_firstmigratttioon.cs
     public partial class firstmigratttioon : Migration
+========
+    public partial class InitialMigration : Migration
+>>>>>>>> tailwindIntregation:AspNetBlog/AspNetBlog/Data/Migrations/20231022162531_InitialMigration.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

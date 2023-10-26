@@ -22,7 +22,7 @@ namespace AspNetBlog.Data
         // we just assign countries to the posts
         // we could also get the countries via API 
         
-        
         //implement logic to delete user posts if desired else the post created by will be "deleted user"
+
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Fabi0\\Desktop\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj": {}
+    "C:\\Users\\Goncalo\\Documents\\GitHub\\AspNetCoreBlog\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Fabi0\\Desktop\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj": {
+    "C:\\Users\\Goncalo\\Documents\\GitHub\\AspNetCoreBlog\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fabi0\\Desktop\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj",
+        "projectUniqueName": "C:\\Users\\Goncalo\\Documents\\GitHub\\AspNetCoreBlog\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj",
         "projectName": "AspNetBlog",
-        "projectPath": "C:\\Users\\Fabi0\\Desktop\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj",
-        "packagesPath": "C:\\Users\\Fabi0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fabi0\\Desktop\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\obj\\",
+        "projectPath": "C:\\Users\\Goncalo\\Documents\\GitHub\\AspNetCoreBlog\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\AspNetBlog.csproj",
+        "packagesPath": "C:\\Users\\Goncalo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Goncalo\\Documents\\GitHub\\AspNetCoreBlog\\BlogASP.NETCore\\AspNetBlog\\AspNetBlog\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Fabi0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Goncalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,6 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -93,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

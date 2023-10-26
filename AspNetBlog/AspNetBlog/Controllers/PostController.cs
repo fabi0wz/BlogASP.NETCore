@@ -9,6 +9,7 @@ using AspNetBlog.Data;
 using AspNetBlog.Models;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace AspNetBlog.Controllers
 {
     public class PostController : Controller
@@ -54,9 +55,10 @@ namespace AspNetBlog.Controllers
         {
             ViewData["CreatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             ViewData["UpdatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+
             return View();
         }
-
+    
         // POST: Post/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -74,6 +76,7 @@ namespace AspNetBlog.Controllers
             ViewData["CreatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.CreatedById);
             ViewData["UpdatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.UpdatedById);
             return View(post);
+
         }
 
         // GET: Post/Edit/5
@@ -91,6 +94,7 @@ namespace AspNetBlog.Controllers
             }
             ViewData["CreatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.CreatedById);
             ViewData["UpdatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.UpdatedById);
+
             return View(post);
         }
 
@@ -128,6 +132,7 @@ namespace AspNetBlog.Controllers
             }
             ViewData["CreatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.CreatedById);
             ViewData["UpdatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.UpdatedById);
+
             return View(post);
         }
 
