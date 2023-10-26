@@ -399,12 +399,10 @@ namespace AspNetBlog.Data.Migrations
                     b.HasOne("AspNetBlog.Models.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById");
- 
 
                     b.HasOne("AspNetBlog.Models.ApplicationUser", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById");
-
 
                     b.Navigation("CreatedBy");
 

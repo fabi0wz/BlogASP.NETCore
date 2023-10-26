@@ -582,3 +582,5 @@ C:\Users\Goncalo\Documents\GitHub\AspNetCoreBlog\BlogASP.NETCore\AspNetBlog\AspN
 C:\Users\Goncalo\Documents\GitHub\AspNetCoreBlog\BlogASP.NETCore\AspNetBlog\AspNetBlog\obj\Debug\net7.0\ref\AspNetBlog.dll
 C:\Users\Goncalo\Documents\GitHub\AspNetCoreBlog\BlogASP.NETCore\AspNetBlog\AspNetBlog\bin\Debug\net7.0\package-lock.json
 C:\Users\Goncalo\Documents\GitHub\AspNetCoreBlog\BlogASP.NETCore\AspNetBlog\AspNetBlog\bin\Debug\net7.0\package.json
+C:\Users\Fabi0\Desktop\BlogASP.NETCore\AspNetBlog\AspNetBlog\bin\Debug\net7.0\package-lock.json
+C:\Users\Fabi0\Desktop\BlogASP.NETCore\AspNetBlog\AspNetBlog\bin\Debug\net7.0\package.json

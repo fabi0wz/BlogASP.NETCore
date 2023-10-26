@@ -9,145 +9,145 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AspNetBlog
 build_property.RootNamespace = AspNetBlog
-build_property.ProjectDir = C:\Users\Goncalo\Documents\GitHub\AspNetCoreBlog\BlogASP.NETCore\AspNetBlog\AspNetBlog\
+build_property.ProjectDir = C:\Users\Fabi0\Desktop\BlogASP.NETCore\AspNetBlog\AspNetBlog\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Goncalo\Documents\GitHub\AspNetCoreBlog\BlogASP.NETCore\AspNetBlog\AspNetBlog
+build_property.MSBuildProjectDirectory = C:\Users\Fabi0\Desktop\BlogASP.NETCore\AspNetBlog\AspNetBlog
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Home/Index.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Home/Privacy.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Create.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Delete.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Details.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Edit.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Index.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Create.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9JbWFnZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Delete.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9JbWFnZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Details.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9JbWFnZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Edit.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9JbWFnZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Index.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_Images/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9JbWFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Create.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0NvbW1lbnRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Delete.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0NvbW1lbnRzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Details.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0NvbW1lbnRzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Edit.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0NvbW1lbnRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Index.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Comments/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0NvbW1lbnRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Create.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0xpa2VzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Delete.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0xpa2VzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Details.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0xpa2VzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Edit.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0xpa2VzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Index.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Likes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX0xpa2VzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Create.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX1ZpZXdzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Delete.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX1ZpZXdzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Details.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX1ZpZXdzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Edit.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX1ZpZXdzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Index.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Post_User_Views/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdF9Vc2VyX1ZpZXdzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/Error.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/_ViewImports.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/_ViewStart.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Goncalo/Documents/GitHub/AspNetCoreBlog/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/_Layout.cshtml]
+[C:/Users/Fabi0/Desktop/BlogASP.NETCore/AspNetBlog/AspNetBlog/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-nyqbq1i7z0

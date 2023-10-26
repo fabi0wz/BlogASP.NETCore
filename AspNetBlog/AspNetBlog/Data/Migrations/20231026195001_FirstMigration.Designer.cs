@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:AspNetBlog/AspNetBlog/Data/Migrations/20231023205803_FirstMigration.Designer.cs
-    [Migration("20231023205803_FirstMigration")]
+    [Migration("20231026195001_FirstMigration")]
     partial class FirstMigration
-========
-    [Migration("20231022162531_InitialMigration")]
-    partial class InitialMigration
->>>>>>>> tailwindIntregation:AspNetBlog/AspNetBlog/Data/Migrations/20231022162531_InitialMigration.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
