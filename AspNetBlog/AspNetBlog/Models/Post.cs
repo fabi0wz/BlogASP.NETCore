@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AspNetBlog.Models;
 
@@ -14,12 +15,11 @@ public class Post
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     
-    public string Created_ById { get; set; } // string because IdentityUser has string Id
-    public string? Updated_ById { get; set; } // string because IdentityUser has string Id
+    public string? CreatedById { get; set; }
+    public string? UpdatedById { get; set; }
     
-    [ForeignKey("Created_ById")]
-    public virtual IdentityUser CreatedBy { get; set; }
-    
-    [ForeignKey("Updated_ById")]
-    public virtual IdentityUser UpdatedBy { get; set; }
+    [ForeignKey("CreatedById")]
+    public ApplicationUser? CreatedBy { get; set; }
+    [ForeignKey("UpdatedById")]
+    public ApplicationUser? UpdatedBy { get; set; }
 }

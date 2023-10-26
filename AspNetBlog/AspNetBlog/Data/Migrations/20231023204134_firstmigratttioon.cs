@@ -6,11 +6,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AspNetBlog.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class firstmigratttioon : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<string>(
+                name: "Description",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Discriminator",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "ProfilePictureUrl",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
             migrationBuilder.CreateTable(
                 name: "Post",
                 columns: table => new
@@ -22,23 +41,24 @@ namespace AspNetBlog.Data.Migrations
                     Post_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Created_ById = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Updated_ById = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    CreatedById = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UpdatedById = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Post", x => x.Post_Id);
                     table.ForeignKey(
-                        name: "FK_Post_AspNetUsers_Created_ById",
-                        column: x => x.Created_ById,
+                        name: "FK_Post_AspNetUsers_CreatedById",
+                        column: x => x.CreatedById,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Post_AspNetUsers_Updated_ById",
-                        column: x => x.Updated_ById,
+                        name: "FK_Post_AspNetUsers_UpdatedById",
+                        column: x => x.UpdatedById,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,14 +166,14 @@ namespace AspNetBlog.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_Created_ById",
+                name: "IX_Post_CreatedById",
                 table: "Post",
-                column: "Created_ById");
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_Updated_ById",
+                name: "IX_Post_UpdatedById",
                 table: "Post",
-                column: "Updated_ById");
+                column: "UpdatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_Images_Post_Id",
@@ -213,6 +233,18 @@ namespace AspNetBlog.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Post");
+
+            migrationBuilder.DropColumn(
+                name: "Description",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Discriminator",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "ProfilePictureUrl",
+                table: "AspNetUsers");
         }
     }
 }

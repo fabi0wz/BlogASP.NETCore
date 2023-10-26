@@ -24,5 +24,5 @@ public class Post_User_Comments
     public virtual Post Post { get; set; }
     
     [ForeignKey("User_Id")]
-    public virtual IdentityUser User_Comment { get; set; }
+    public virtual ApplicationUser User_Comment { get; set; }
 }

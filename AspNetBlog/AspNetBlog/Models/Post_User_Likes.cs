@@ -17,5 +17,5 @@ public class Post_User_Likes
     public virtual Post Post { get; set; }
   
     [ForeignKey("User_Id")]
-    public virtual IdentityUser User { get; set; }
+    public virtual ApplicationUser User { get; set; }
 }
