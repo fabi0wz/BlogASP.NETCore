@@ -14,12 +14,12 @@ public class Post
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     
-    public string Created_ById { get; set; } // string because IdentityUser has string Id
-    public string? Updated_ById { get; set; } // string because IdentityUser has string Id
-    
-    [ForeignKey("Created_ById")]
+    [ForeignKey("CreatedBy")]
+    public string? CreatedById { get; set; }
     public virtual IdentityUser CreatedBy { get; set; }
     
-    [ForeignKey("Updated_ById")]
-    public virtual IdentityUser UpdatedBy { get; set; }
+    [ForeignKey("UpdatedBy")]
+    public string? UpdatedById { get; set; }
+    public virtual IdentityUser UpdatedBy{ get; set; }
+    
 }

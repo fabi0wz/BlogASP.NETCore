@@ -33,7 +33,7 @@ namespace AspNetBlog.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Created_ById")
+                    b.Property<string>("CreatedById")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -52,14 +52,15 @@ namespace AspNetBlog.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Updated_ById")
+                    b.Property<string>("UpdatedById")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Post_Id");
 
-                    b.HasIndex("Created_ById");
+                    b.HasIndex("CreatedById");
 
-                    b.HasIndex("Updated_ById");
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Post");
                 });
@@ -376,13 +377,15 @@ namespace AspNetBlog.Data.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("Created_ById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "UpdatedBy")
                         .WithMany()
-                        .HasForeignKey("Updated_ById");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("CreatedBy");
 
