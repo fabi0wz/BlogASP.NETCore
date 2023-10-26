@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetBlog.Data;
 using AspNetBlog.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetBlog.Controllers
 {
@@ -20,6 +21,7 @@ namespace AspNetBlog.Controllers
         }
 
         // GET: Post
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Post.Include(p => p.CreatedBy).Include(p => p.UpdatedBy);
@@ -47,6 +49,7 @@ namespace AspNetBlog.Controllers
         }
 
         // GET: Post/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CreatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
@@ -57,6 +60,7 @@ namespace AspNetBlog.Controllers
         // POST: Post/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt,CreatedById,UpdatedById")] Post post)
