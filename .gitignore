@@ -1,6 +1,6 @@
 *.suo
 *.user
 _ReSharper.*
-**/AspNetBlog/AspNetBlog/bin
-**/AspNetBlog/AspNetBlog/obj
+*/AspNetBlog/AspNetBlog/bin
+*/AspNetBlog/AspNetBlog/obj
 
