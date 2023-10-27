@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <Target Name="Tailwind" BeforeTargets="Build">
-    <Exec Command="npm run css:build"/>
+    <Exec Command="npm run css:build" />
   </Target>
   
   <ItemGroup>
@@ -33,11 +33,10 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\DELETEAFTERRoute\ListRoutes.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Post\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Post\Delete.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Post\Details.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Post\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Post\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
 </Project>
