@@ -75,8 +75,8 @@ namespace AspNetBlog.Controllers
             }
             ViewData["CreatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.CreatedById);
             ViewData["UpdatedById"] = new SelectList(_context.ApplicationUsers, "Id", "Id", post.UpdatedById);
+            
             return View(post);
-
         }
 
         // GET: Post/Edit/5

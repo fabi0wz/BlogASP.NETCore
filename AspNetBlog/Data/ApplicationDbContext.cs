@@ -15,7 +15,6 @@ namespace AspNetBlog.Data
         public DbSet<Post_User_Likes> Post_User_Likes { get; set; } = default!;
         public DbSet<Post_User_Views> Post_User_Views { get; set; } = default!;
         public DbSet<Post_Images> Post_Images { get; set; } = default!;
-        
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = default!;
         
         // We dont need to create Country Tables because they'll be created manually on the database via script
