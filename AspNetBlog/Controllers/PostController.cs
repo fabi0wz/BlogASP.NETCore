@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,26 +8,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetBlog.Data;
 using AspNetBlog.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetBlog.Controllers
+
 {
-    public class PostsController : Controller
+    public class PostController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PostsController(ApplicationDbContext context)
+        public PostController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: Posts
+        // GET: Post
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Post.Include(p => p.CreatedBy).Include(p => p.UpdatedBy);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.Post != null ? 
+                          View(await _context.Post.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Post'  is null.");
         }
 
-        // GET: Posts/Details/5
+        // GET: Post/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Post == null)
@@ -35,8 +41,6 @@ namespace AspNetBlog.Controllers
             }
 
             var post = await _context.Post
-                .Include(p => p.CreatedBy)
-                .Include(p => p.UpdatedBy)
                 .FirstOrDefaultAsync(m => m.Post_Id == id);
             if (post == null)
             {
@@ -46,34 +50,39 @@ namespace AspNetBlog.Controllers
             return View(post);
         }
 
-        // GET: Posts/Create
+        // GET: Post/Create
         public IActionResult Create()
         {
-            ViewData["CreatedById"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["UpdatedById"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Posts/Create
+        // POST: Post/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt,CreatedById,UpdatedById")] Post post)
+        public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post)
         {
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                
+                // Set CreatedBy and UpdatedBy
+                post.CreatedBy = currentUser;
+                post.UpdatedBy = currentUser;
+            }
+            
             if (ModelState.IsValid)
             {
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["CreatedById"] = new SelectList(_context.Users, "Id", "Id", post.CreatedById);
-            ViewData["UpdatedById"] = new SelectList(_context.Users, "Id", "Id", post.UpdatedById);
             return View(post);
         }
 
-        // GET: Posts/Edit/5
+        // GET: Post/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Post == null)
@@ -86,17 +95,15 @@ namespace AspNetBlog.Controllers
             {
                 return NotFound();
             }
-            ViewData["CreatedById"] = new SelectList(_context.Users, "Id", "Id", post.CreatedById);
-            ViewData["UpdatedById"] = new SelectList(_context.Users, "Id", "Id", post.UpdatedById);
             return View(post);
         }
 
-        // POST: Posts/Edit/5
+        // POST: Post/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt,CreatedById,UpdatedById")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post)
         {
             if (id != post.Post_Id)
             {
@@ -123,12 +130,10 @@ namespace AspNetBlog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatedById"] = new SelectList(_context.Users, "Id", "Id", post.CreatedById);
-            ViewData["UpdatedById"] = new SelectList(_context.Users, "Id", "Id", post.UpdatedById);
             return View(post);
         }
 
-        // GET: Posts/Delete/5
+        // GET: Post/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Post == null)
@@ -137,8 +142,6 @@ namespace AspNetBlog.Controllers
             }
 
             var post = await _context.Post
-                .Include(p => p.CreatedBy)
-                .Include(p => p.UpdatedBy)
                 .FirstOrDefaultAsync(m => m.Post_Id == id);
             if (post == null)
             {
@@ -148,7 +151,7 @@ namespace AspNetBlog.Controllers
             return View(post);
         }
 
-        // POST: Posts/Delete/5
+        // POST: Post/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AspNetBlog.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class teste : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,15 +33,13 @@ namespace AspNetBlog.Data.Migrations
                 name: "Description",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "ProfilePictureUrl",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "ProviderKey",

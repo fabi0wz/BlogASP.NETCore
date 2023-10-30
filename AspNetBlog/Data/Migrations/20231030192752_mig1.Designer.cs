@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231027205409_nulls2")]
-    partial class nulls2
+    [Migration("20231030192752_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

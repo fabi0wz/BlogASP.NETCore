@@ -20,15 +20,10 @@ public class Post
     [Display(Name = "Updated At")]
     public DateTime? UpdatedAt { get; set; }
     
-    public string? CreatedById { get; set; }
-    public string? UpdatedById { get; set; }
-    
     [Display(Name = "Updated By")]
-    [ForeignKey("CreatedById")]
     public ApplicationUser? CreatedBy { get; set; }
     
     [Display(Name = "Created By")]
-    [ForeignKey("UpdatedById")]
     public ApplicationUser? UpdatedBy { get; set; }
 
 }

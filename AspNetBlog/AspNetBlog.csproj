@@ -33,6 +33,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\DELETEAFTERRoute\ListRoutes.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Posts\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Posts\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Posts\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Posts\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Posts\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
