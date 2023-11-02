@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231030192752_mig1")]
-    partial class mig1
+    [Migration("20231102220414_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,25 +174,25 @@ namespace AspNetBlog.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("Parent_Comment")
+                    b.Property<int>("Post_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Post_Id")
+                    b.Property<int?>("Post_User_Comments1Comment_Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("User_Id")
+                    b.Property<string>("User_CommentId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Comment_Id");
 
-                    b.HasIndex("Parent_Comment");
-
                     b.HasIndex("Post_Id");
 
-                    b.HasIndex("User_Id");
+                    b.HasIndex("Post_User_Comments1Comment_Id");
+
+                    b.HasIndex("User_CommentId");
 
                     b.ToTable("Post_User_Comments");
                 });
@@ -208,14 +208,14 @@ namespace AspNetBlog.Data.Migrations
                     b.Property<int>("Post_Id")
                         .HasColumnType("int");
 
-                    b.Property<string>("User_Id")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Like_Id");
 
                     b.HasIndex("Post_Id");
 
-                    b.HasIndex("User_Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Post_User_Likes");
                 });
@@ -231,14 +231,14 @@ namespace AspNetBlog.Data.Migrations
                     b.Property<int>("Post_Id")
                         .HasColumnType("int");
 
-                    b.Property<string>("User_Id")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("View_Id");
 
                     b.HasIndex("Post_Id");
 
-                    b.HasIndex("User_Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Post_User_Views");
                 });
@@ -404,19 +404,19 @@ namespace AspNetBlog.Data.Migrations
 
             modelBuilder.Entity("AspNetBlog.Models.Post_User_Comments", b =>
                 {
-                    b.HasOne("AspNetBlog.Models.Post_User_Comments", "Post_User_Comments1")
-                        .WithMany()
-                        .HasForeignKey("Parent_Comment");
-
                     b.HasOne("AspNetBlog.Models.Post", "Post")
                         .WithMany()
                         .HasForeignKey("Post_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AspNetBlog.Models.Post_User_Comments", "Post_User_Comments1")
+                        .WithMany()
+                        .HasForeignKey("Post_User_Comments1Comment_Id");
+
                     b.HasOne("AspNetBlog.Models.ApplicationUser", "User_Comment")
                         .WithMany()
-                        .HasForeignKey("User_Id");
+                        .HasForeignKey("User_CommentId");
 
                     b.Navigation("Post");
 
@@ -435,7 +435,7 @@ namespace AspNetBlog.Data.Migrations
 
                     b.HasOne("AspNetBlog.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("User_Id");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Post");
 
@@ -452,7 +452,7 @@ namespace AspNetBlog.Data.Migrations
 
                     b.HasOne("AspNetBlog.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("User_Id");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Post");
 
