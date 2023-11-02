@@ -5,6 +5,9 @@ module.exports = {
     enabeld: true,
     content: ["./Views/**/*.cshtml"],
   },
+  daisyui: {
+    themes: ["black", "lofi"],
+  },
   theme: {
     extend: {},
   },

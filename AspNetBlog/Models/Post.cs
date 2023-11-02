@@ -15,15 +15,17 @@ public class Post
     public string Post_Content { get; set; }
     [Display(Name = "Post Description")]
     public string Post_Description { get; set; }
+    
     [Display(Name = "Created At")]
     public DateTime CreatedAt { get; set; }
+    
     [Display(Name = "Updated At")]
     public DateTime? UpdatedAt { get; set; }
     
-    [Display(Name = "Updated By")]
+    //Foreign Keys
+    [Display(Name = "Created By")]
     public ApplicationUser? CreatedBy { get; set; }
     
-    [Display(Name = "Created By")]
+    [Display(Name = "Updated By")]
     public ApplicationUser? UpdatedBy { get; set; }
-
 }
