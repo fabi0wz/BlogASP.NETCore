@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AspNetBlog.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -94,8 +94,8 @@ namespace AspNetBlog.Data.Migrations
                 {
                     Image_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Post_Id = table.Column<int>(type: "int", nullable: false),
-                    Image_Path = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Image_Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Post_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,19 +114,19 @@ namespace AspNetBlog.Data.Migrations
                 {
                     Comment_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Post_Id = table.Column<int>(type: "int", nullable: false),
-                    User_Id = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Parent_Comment = table.Column<int>(type: "int", nullable: true)
+                    Post_User_Comments1Comment_Id = table.Column<int>(type: "int", nullable: true),
+                    Post_Id = table.Column<int>(type: "int", nullable: false),
+                    User_CommentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Post_User_Comments", x => x.Comment_Id);
                     table.ForeignKey(
-                        name: "FK_Post_User_Comments_AspNetUsers_User_Id",
-                        column: x => x.User_Id,
+                        name: "FK_Post_User_Comments_AspNetUsers_User_CommentId",
+                        column: x => x.User_CommentId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -136,8 +136,8 @@ namespace AspNetBlog.Data.Migrations
                         principalColumn: "Post_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Post_User_Comments_Post_User_Comments_Parent_Comment",
-                        column: x => x.Parent_Comment,
+                        name: "FK_Post_User_Comments_Post_User_Comments_Post_User_Comments1Comment_Id",
+                        column: x => x.Post_User_Comments1Comment_Id,
                         principalTable: "Post_User_Comments",
                         principalColumn: "Comment_Id");
                 });
@@ -149,14 +149,14 @@ namespace AspNetBlog.Data.Migrations
                     Like_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Post_Id = table.Column<int>(type: "int", nullable: false),
-                    User_Id = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Post_User_Likes", x => x.Like_Id);
                     table.ForeignKey(
-                        name: "FK_Post_User_Likes_AspNetUsers_User_Id",
-                        column: x => x.User_Id,
+                        name: "FK_Post_User_Likes_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -174,14 +174,14 @@ namespace AspNetBlog.Data.Migrations
                     View_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Post_Id = table.Column<int>(type: "int", nullable: false),
-                    User_Id = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Post_User_Views", x => x.View_Id);
                     table.ForeignKey(
-                        name: "FK_Post_User_Views_AspNetUsers_User_Id",
-                        column: x => x.User_Id,
+                        name: "FK_Post_User_Views_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -208,19 +208,19 @@ namespace AspNetBlog.Data.Migrations
                 column: "Post_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_User_Comments_Parent_Comment",
-                table: "Post_User_Comments",
-                column: "Parent_Comment");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Post_User_Comments_Post_Id",
                 table: "Post_User_Comments",
                 column: "Post_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_User_Comments_User_Id",
+                name: "IX_Post_User_Comments_Post_User_Comments1Comment_Id",
                 table: "Post_User_Comments",
-                column: "User_Id");
+                column: "Post_User_Comments1Comment_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Post_User_Comments_User_CommentId",
+                table: "Post_User_Comments",
+                column: "User_CommentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_User_Likes_Post_Id",
@@ -228,9 +228,9 @@ namespace AspNetBlog.Data.Migrations
                 column: "Post_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_User_Likes_User_Id",
+                name: "IX_Post_User_Likes_UserId",
                 table: "Post_User_Likes",
-                column: "User_Id");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_User_Views_Post_Id",
@@ -238,9 +238,9 @@ namespace AspNetBlog.Data.Migrations
                 column: "Post_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_User_Views_User_Id",
+                name: "IX_Post_User_Views_UserId",
                 table: "Post_User_Views",
-                column: "User_Id");
+                column: "UserId");
         }
 
         /// <inheritdoc />

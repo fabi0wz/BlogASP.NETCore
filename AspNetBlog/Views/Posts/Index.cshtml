@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AspNetBlog.Models.Post>
+@model IEnumerable<AspNetBlog.Models.Post>
 
 @{
     ViewData["Title"] = "Index";
@@ -27,12 +27,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.UpdatedAt)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedBy)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -53,12 +47,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedBy.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Post_Id">Edit</a> |

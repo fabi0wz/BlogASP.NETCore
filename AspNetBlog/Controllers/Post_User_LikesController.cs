@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,104 +7,90 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetBlog.Data;
 using AspNetBlog.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace AspNetBlog.Controllers
-
 {
-    public class PostController : Controller
+    public class Post_User_LikesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PostController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public Post_User_LikesController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        // GET: Post
+        // GET: Post_User_Likes
         public async Task<IActionResult> Index()
         {
-              return _context.Post != null ? 
-                          View(await _context.Post.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Post'  is null.");
+              return _context.Post_User_Likes != null ? 
+                          View(await _context.Post_User_Likes.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Post_User_Likes'  is null.");
         }
 
-        // GET: Post/Details/5
+        // GET: Post_User_Likes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Post == null)
+            if (id == null || _context.Post_User_Likes == null)
             {
                 return NotFound();
             }
 
-            var post = await _context.Post
-                .FirstOrDefaultAsync(m => m.Post_Id == id);
-            if (post == null)
+            var post_User_Likes = await _context.Post_User_Likes
+                .FirstOrDefaultAsync(m => m.Like_Id == id);
+            if (post_User_Likes == null)
             {
                 return NotFound();
             }
 
-            return View(post);
+            return View(post_User_Likes);
         }
 
-        // GET: Post/Create
+        // GET: Post_User_Likes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Post/Create
+        // POST: Post_User_Likes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post)
+        public async Task<IActionResult> Create([Bind("Like_Id")] Post_User_Likes post_User_Likes)
         {
-            
-            if (User.Identity.IsAuthenticated)
-            {
-                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                
-                // Set CreatedBy and UpdatedBy
-                post.CreatedBy = currentUser;
-                post.UpdatedBy = currentUser;
-            }
-            
             if (ModelState.IsValid)
             {
-                _context.Add(post);
+                _context.Add(post_User_Likes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(post);
+            return View(post_User_Likes);
         }
 
-        // GET: Post/Edit/5
+        // GET: Post_User_Likes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Post == null)
+            if (id == null || _context.Post_User_Likes == null)
             {
                 return NotFound();
             }
 
-            var post = await _context.Post.FindAsync(id);
-            if (post == null)
+            var post_User_Likes = await _context.Post_User_Likes.FindAsync(id);
+            if (post_User_Likes == null)
             {
                 return NotFound();
             }
-            return View(post);
+            return View(post_User_Likes);
         }
 
-        // POST: Post/Edit/5
+        // POST: Post_User_Likes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Like_Id")] Post_User_Likes post_User_Likes)
         {
-            if (id != post.Post_Id)
+            if (id != post_User_Likes.Like_Id)
             {
                 return NotFound();
             }
@@ -114,12 +99,12 @@ namespace AspNetBlog.Controllers
             {
                 try
                 {
-                    _context.Update(post);
+                    _context.Update(post_User_Likes);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PostExists(post.Post_Id))
+                    if (!Post_User_LikesExists(post_User_Likes.Like_Id))
                     {
                         return NotFound();
                     }
@@ -130,49 +115,49 @@ namespace AspNetBlog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(post);
+            return View(post_User_Likes);
         }
 
-        // GET: Post/Delete/5
+        // GET: Post_User_Likes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Post == null)
+            if (id == null || _context.Post_User_Likes == null)
             {
                 return NotFound();
             }
 
-            var post = await _context.Post
-                .FirstOrDefaultAsync(m => m.Post_Id == id);
-            if (post == null)
+            var post_User_Likes = await _context.Post_User_Likes
+                .FirstOrDefaultAsync(m => m.Like_Id == id);
+            if (post_User_Likes == null)
             {
                 return NotFound();
             }
 
-            return View(post);
+            return View(post_User_Likes);
         }
 
-        // POST: Post/Delete/5
+        // POST: Post_User_Likes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Post == null)
+            if (_context.Post_User_Likes == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Post'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Post_User_Likes'  is null.");
             }
-            var post = await _context.Post.FindAsync(id);
-            if (post != null)
+            var post_User_Likes = await _context.Post_User_Likes.FindAsync(id);
+            if (post_User_Likes != null)
             {
-                _context.Post.Remove(post);
+                _context.Post_User_Likes.Remove(post_User_Likes);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PostExists(int id)
+        private bool Post_User_LikesExists(int id)
         {
-          return (_context.Post?.Any(e => e.Post_Id == id)).GetValueOrDefault();
+          return (_context.Post_User_Likes?.Any(e => e.Like_Id == id)).GetValueOrDefault();
         }
     }
 }

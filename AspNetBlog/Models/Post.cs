@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -20,10 +21,12 @@ public class Post
     [Display(Name = "Updated At")]
     public DateTime? UpdatedAt { get; set; }
     
-    [Display(Name = "Updated By")]
+    //Foreign Keys
+    
+    [DisplayName("Created By")]
     public ApplicationUser? CreatedBy { get; set; }
     
-    [Display(Name = "Created By")]
+    [DisplayName("Updated By")]
     public ApplicationUser? UpdatedBy { get; set; }
 
 }
