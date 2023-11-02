@@ -10,7 +10,7 @@ public class Post_Images
     public int Image_Id { get; set; }
     public string Image_Path { get; set; }
     
-    //Foreign Keys
+
     [DisplayName("Post Id")]
     public virtual Post Post { get; set; }
 }
