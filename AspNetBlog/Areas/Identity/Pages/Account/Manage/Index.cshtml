@@ -5,7 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
+<h3 class="block text-green-500 text-sm font-bold mb-2">@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="flex flex-wrap">
     @if (!string.IsNullOrEmpty(Model.Input.ProfilePictureUrl))
@@ -18,25 +18,25 @@
         <form id="profile-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="mb-3">
-                <label for="Username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                <input asp-for="Username" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline" placeholder="Please choose your username." disabled />
+                <label for="Username" class="block text-green-500 text-sm font-bold mb-2">Username</label>
+                <input asp-for="Username" class="w-60 px-1 py-2 leading-tight text-neutral-50 border rounded focus:outline-none focus:shadow-outline" placeholder="Please choose your username." disabled />
             </div>
             <div class="mb-3">
-                <label for="Input.PhoneNumber" class="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
-                <input asp-for="Input.PhoneNumber" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline" placeholder="Please enter your phone number." />
+                <label for="Input.PhoneNumber" class="block text-green-500 text-sm font-bold mb-2">Phone Number</label>
+                <input asp-for="Input.PhoneNumber" class="w-60 px-1 py-2 leading-tight text-neutral-50 border rounded focus:outline-none focus:shadow-outline" placeholder="Please enter your phone number." />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label for="Input.Description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
-                <input asp-for="Input.Description" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline" placeholder="Please enter your Description." />
+                <label for="Input.Description" class="block text-green-500 text-sm font-bold mb-2">Description</label>
+                <input asp-for="Input.Description" class="w-60 px-1 py-2 leading-tight text-neutral-50 border rounded focus:outline-none focus:shadow-outline" placeholder="Please enter your Description." />
                 <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label for="Input.ImageFile" class="block text-gray-700 text-sm font-bold mb-2">Profile Picture</label>
+                <label for="Input.ImageFile" class="block text-green-500 text-sm font-bold mb-2">Profile Picture</label>
                 <input asp-for="Input.ImageFile" type="file" class="file-input file-input-bordered file-input-success w-full max-w-xs" />
             </div>
-            <button id="update-profile-button" type="submit" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Save</button>
+            <button id="update-profile-button" type="submit" class="btn btn-success">Save</button>
         </form>
     </div>
 </div>

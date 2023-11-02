@@ -2,9 +2,19 @@
 
 @if (!String.IsNullOrEmpty(Model))
 {
-    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
-    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    var statusMessageClass = Model.StartsWith("Error") ? "error" : "info";
+    <div class="alert alert-@statusMessageClass" role="alert">
+        <button type="button" class="p-2 rounded-full hover:bg-lime-200 text-red-600 hover:text-white transition-all" aria-label="Close" onclick="CloseAlert()">
+            &#10006;
+        </button>
         @Model
     </div>
 }
+
+<script>
+    function CloseAlert() {
+        const alert = document.querySelector(".alert");
+        alert.style.display = "none";
+    }
+</script>
+
