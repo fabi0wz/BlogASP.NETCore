@@ -13,6 +13,7 @@
                     class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                     placeholder="Write a comment..." required></textarea>
                 <span asp-validation-for="Comment" class="text-danger"></span>
+                @Html.HiddenFor(model => model.Post.Post_Id)
             </div>
             <button type="submit"
                 class="btn btn-primary">Post comment

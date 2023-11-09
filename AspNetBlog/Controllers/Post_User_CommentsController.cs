@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetBlog.Data;
 using AspNetBlog.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetBlog.Controllers
 {
     public class Post_User_CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public Post_User_CommentsController(ApplicationDbContext context)
+        public Post_User_CommentsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Post_User_Comments
@@ -56,14 +59,23 @@ namespace AspNetBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Comment_Id,Comment,CreatedAt,UpdatedAt")] Post_User_Comments post_User_Comments)
+        public async Task<IActionResult> Create([Bind("Comment_Id,Comment,CreatedAt,UpdatedAt,Post")] Post_User_Comments post_User_Comments)
         {
+            post_User_Comments.Post = await _context.Post.FindAsync(post_User_Comments.Post.Post_Id);
+            //post_User_Comments.User_Comment = await _userManager.GetUserAsync(User);
+            post_User_Comments.CreatedAt = DateTime.Now;
+
+            post_User_Comments.User_Comment = await _userManager.FindByIdAsync("652ad2b4-4534-41ad-9f7b-3ca0fd103fc9");
+
+            ModelState.Clear();
+            
             if (ModelState.IsValid)
             {
                 _context.Add(post_User_Comments);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(post_User_Comments);
         }
 

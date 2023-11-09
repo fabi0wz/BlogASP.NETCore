@@ -48,10 +48,11 @@ namespace AspNetBlog.Controllers
             var postImages = _context.Post_Images.Where(pi => pi.Post.Post_Id == id).ToList();
 
             var postUserComments = _context.Post_User_Comments
+                .Include(puc => puc.User_Comment)
                 .Where(puc => puc.Post.Post_Id == id)
                 .OrderBy(puc => puc.CreatedAt)
                 .ToList();
-
+            
             
             var viewModel = new PostDetailsViewModel
             {
