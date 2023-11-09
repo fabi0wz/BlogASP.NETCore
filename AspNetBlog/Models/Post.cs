@@ -28,7 +28,6 @@ public class Post
     public ApplicationUser? CreatedBy { get; set; }
     
     [DisplayName("Updated By")]
-
-n
+    
     public ApplicationUser? UpdatedBy { get; set; }
 }
