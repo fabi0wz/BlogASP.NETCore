@@ -3,10 +3,12 @@ module.exports = {
   content: [],
   purge: {
     enabeld: true,
-    content: ["./Views/**/*.cshtml"],
+      content: ["./Views/**/*.cshtml",
+                "./Areas/**/*.cshtml"
+      ],
   },
   daisyui: {
-    themes: ["black", "lofi"],
+    themes: ["business", "lofi"],
   },
   theme: {
     extend: {},
