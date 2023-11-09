@@ -88,59 +88,72 @@
         <div>
             @foreach(var UserComment in Model.PostUserComments)
             {
-            <article class="p-6 text-base rounded-lg">
-                <footer class="flex justify-between items-center mb-2">
-                    <div class="flex items-center">
-                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                            <img
-                                class="mr-2 w-6 h-6 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                alt="Michael Gough">
-                            @Html.Raw(UserComment.User_Comment.UserName != null ? $"<span>{UserComment.User_Comment.UserName}</span>" : "<span>Deleted User</span>")
+                <article class="p-6 text-base rounded-lg" id="Comment_@UserComment.Comment_Id">
+                    <footer class="flex justify-between items-center mb-2">
+                        <div class="flex items-center">
+                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                <img
+                                    class="mr-2 w-6 h-6 rounded-full"
+                                    src="/images/UserPictures/@UserComment.User_Comment.ProfilePictureUrl"
+                                    alt="Michael Gough">
+                                @Html.Raw(UserComment.User_Comment.UserName != null ? $"<span>{UserComment.User_Comment.UserName}</span>" : "<span>Deleted User</span>")
 
-                        </p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
-                        <time pubdate datetime="@UserComment.CreatedAt.ToString("yyyy-MM-dd")" title="@UserComment.CreatedAt.ToString("MMMM d, yyyy")">@UserComment.CreatedAt.ToString("MMM. d, yyyy")</time>
-                        </p>
+                            </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                <time pubdate datetime="@UserComment.CreatedAt.ToString("yyyy-MM-dd")" title="@UserComment.CreatedAt.ToString("MMMM d, yyyy")">@UserComment.CreatedAt.ToString("MMM. d, yyyy")</time>
+                            </p>
+                        </div>
+                        
+                        @if (UserComment.User_Comment.UserName == User.Identity.Name)
+                        {
+                            <details class="dropdown">
+                                <summary class="m-1 btn" id="dropdownCommentButton_@UserComment.Comment_Id">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                    </svg>
+                                    <span class="sr-only">Comment settings</span>
+                                </summary>
+                                <!-- Dropdown menu -->
+                                <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                    <li>
+                                        <a href="#" class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                    </li>
+                                    <li>
+                                        @* <a class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" *@
+                                        @*    asp-action="Delete" asp- asp-route-id="@UserComment.Comment_Id" asp-controller="Post_User_Comments">Remove</a> *@
+                                        <button class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="my_modal_1.showModal()">Delete</button>
+                                        <dialog id="my_modal_1" class="modal flex justify-center">
+                                          <div class="modal-box">
+                                            <h3 class="font-bold text-lg">Are you sure you want to delete this comment?</h3>
+                                            <div class="modal-action">
+                                                <form asp-action="Delete">
+                                                    <!-- if there is a button in form, it will close the modal -->
+                                                    <button asp-action="Delete" asp- asp-route-id="@UserComment.Comment_Id" asp-controller="Post_User_Comments" class="btn">Yes</button>
+                                                    @Html.HiddenFor(model => model.Post.Post_Id)
+                                                </form>
+                                                <form method="dialog">
+                                                    <!-- if there is a button in form, it will close the modal -->
+                                                    <button class="btn">No</button>
+                                                </form>
+                                            </div>
+                                          </div>
+                                        </dialog>
+                                    </li>
+                                </ul>
+                            </details>
+                        }
+                    </footer>
+                    <p class="text-gray-500 dark:text-gray-400">@UserComment.Comment</p>
+                    <div class="flex items-center mt-4 space-x-4">
+                        <button type="button"
+                                class="btn btn-link">
+                            <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                            </svg>
+                            Reply
+                        </button>
                     </div>
-                    <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
-                            class="btn btn-secondary"
-                            type="button">
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                        </svg>
-                        <span class="sr-only">Comment settings</span>
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div id="dropdownComment1"
-                         class="dropdown">
-                        <ul class="dropdown-content">
-                            <li>
-                                <a href="#"
-                                   class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                            </li>
-                        </ul>
-                    </div>
-                </footer>
-                <p class="text-gray-500 dark:text-gray-400">@UserComment.Comment</p>
-                <div class="flex items-center mt-4 space-x-4">
-                    <button type="button"
-                            class="btn btn-link">
-                        <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-                        </svg>
-                        Reply
-                    </button>
-                </div>
-            </article>
+                </article>
             }
         </div>
         <!-- Repeat the article structure for other comments -->
@@ -152,3 +165,10 @@
     <a asp-action="Edit" asp-route-id="@Model?.Post.Post_Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@if (!string.IsNullOrEmpty(ViewBag.CommentAnchor))
+{
+    <script>
+        document.querySelector("#@ViewBag.CommentAnchor").scrollIntoView();
+    </script>
+}

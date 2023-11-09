@@ -32,7 +32,7 @@ namespace AspNetBlog.Controllers
         }
 
         // GET: Posts/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string commentAnchor)
         {
             if (id == null || _context.Post == null)
             {
@@ -53,13 +53,14 @@ namespace AspNetBlog.Controllers
                 .OrderBy(puc => puc.CreatedAt)
                 .ToList();
             
-            
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
                 PostImages = postImages,
                 PostUserComments = postUserComments
             };
+
+            ViewBag.CommentAnchor = commentAnchor;
             
             return View(viewModel);
         }
@@ -102,7 +103,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
                     var uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
 
                     // Get the path to your image folder (change to your desired folder path)
-                    var imagePath = Path.Combine("wwwroot/images", uniqueFileName);
+                    var imagePath = Path.Combine("wwwroot/images/PostPictures", uniqueFileName);
 
                     using (var stream = new FileStream(imagePath, FileMode.Create))
                     {
@@ -112,7 +113,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
                     // Create a Post_Images instance and associate it with the Post
                     var postImage = new Post_Images
                     {
-                        Image_Path = "/images/" + uniqueFileName, // Adjust the path as needed
+                        Image_Path = "/images/PostPictures/" + uniqueFileName, // Adjust the path as needed
                         Post = post // Associate with the new Post
                     };
 

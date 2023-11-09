@@ -62,18 +62,16 @@ namespace AspNetBlog.Controllers
         public async Task<IActionResult> Create([Bind("Comment_Id,Comment,CreatedAt,UpdatedAt,Post")] Post_User_Comments post_User_Comments)
         {
             post_User_Comments.Post = await _context.Post.FindAsync(post_User_Comments.Post.Post_Id);
-            //post_User_Comments.User_Comment = await _userManager.GetUserAsync(User);
+            post_User_Comments.User_Comment = await _userManager.GetUserAsync(User);
             post_User_Comments.CreatedAt = DateTime.Now;
-
-            post_User_Comments.User_Comment = await _userManager.FindByIdAsync("652ad2b4-4534-41ad-9f7b-3ca0fd103fc9");
-
+            
             ModelState.Clear();
             
             if (ModelState.IsValid)
             {
                 _context.Add(post_User_Comments);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Posts", new { id = post_User_Comments.Post.Post_Id, commentAnchor = "Comment_" + post_User_Comments.Comment_Id });
             }
             
             return View(post_User_Comments);
@@ -153,18 +151,26 @@ namespace AspNetBlog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            
             if (_context.Post_User_Comments == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Post_User_Comments'  is null.");
             }
-            var post_User_Comments = await _context.Post_User_Comments.FindAsync(id);
+            
+            //retrieves the comment with the id passed in and includes the post (to later redirect to the post after the comment is deleted)
+            var post_User_Comments = _context.Post_User_Comments
+                .Include(uid => uid.Post)
+                .Where(puc => puc.Comment_Id == id)
+                .ToList();
+            
+                
             if (post_User_Comments != null)
             {
-                _context.Post_User_Comments.Remove(post_User_Comments);
+                _context.Post_User_Comments.Remove(post_User_Comments[0]);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Posts", new { id = post_User_Comments[0].Post.Post_Id });
         }
 
         private bool Post_User_CommentsExists(int id)

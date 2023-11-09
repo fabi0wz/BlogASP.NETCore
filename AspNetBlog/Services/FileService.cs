@@ -15,7 +15,7 @@
             try
             {
                 var wwwPath = this.environment.WebRootPath;
-                var path = Path.Combine(wwwPath, "Uploads");
+                var path = Path.Combine(wwwPath, "images/UserPictures/");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
