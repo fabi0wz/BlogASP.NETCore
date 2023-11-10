@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,8 +27,15 @@ namespace AspNetBlog.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
+            
+            var PostDetailsViewModel = new PostDetailsViewModel
+            {
+                Posts = await _context.Post.ToListAsync(),
+                PostImages = await _context.Post_Images.ToListAsync(),
+            };
+            
               return _context.Post != null ? 
-                          View(await _context.Post.ToListAsync()) :
+                          View(PostDetailsViewModel) :
                           Problem("Entity set 'ApplicationDbContext.Post'  is null.");
         }
 
@@ -41,6 +49,7 @@ namespace AspNetBlog.Controllers
 
             var post = await _context.Post
                 .FirstOrDefaultAsync(m => m.Post_Id == id);
+                
             if (post == null)
             {
                 return NotFound();

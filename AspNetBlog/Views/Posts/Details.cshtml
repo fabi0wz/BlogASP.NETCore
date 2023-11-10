@@ -119,16 +119,14 @@
                                         <a href="#" class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                     </li>
                                     <li>
-                                        @* <a class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" *@
-                                        @*    asp-action="Delete" asp- asp-route-id="@UserComment.Comment_Id" asp-controller="Post_User_Comments">Remove</a> *@
-                                        <button class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="my_modal_1.showModal()">Delete</button>
-                                        <dialog id="my_modal_1" class="modal flex justify-center">
+                                        <button class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="@("modal"+UserComment.Comment_Id).showModal()">Delete</button>
+                                        <dialog id="@("modal"+UserComment.Comment_Id)" class="modal flex justify-center">
                                           <div class="modal-box">
                                             <h3 class="font-bold text-lg">Are you sure you want to delete this comment?</h3>
                                             <div class="modal-action">
                                                 <form asp-action="Delete">
                                                     <!-- if there is a button in form, it will close the modal -->
-                                                    <button asp-action="Delete" asp- asp-route-id="@UserComment.Comment_Id" asp-controller="Post_User_Comments" class="btn">Yes</button>
+                                                    <button asp-action="Delete" asp-route-id="@UserComment.Comment_Id" asp-controller="Post_User_Comments" class="btn">Yes</button>
                                                     @Html.HiddenFor(model => model.Post.Post_Id)
                                                 </form>
                                                 <form method="dialog">
