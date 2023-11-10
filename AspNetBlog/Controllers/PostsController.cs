@@ -98,7 +98,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
     if (ModelState.IsValid)
     {
         _context.Add(post);
-
+        
         // Save the new Post to the database
         await _context.SaveChangesAsync();
 
@@ -167,7 +167,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post, List<IFormFile> postImages)
         {
             if (id != post.Post_Id)
             {
@@ -179,7 +179,42 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
                 try
                 {
                     _context.Update(post);
+
+                    // Remove imagens antigas associadas ao post
+                    var oldImages = _context.Post_Images.Where(pi => pi.Post.Post_Id == post.Post_Id).ToList();
+                    _context.Post_Images.RemoveRange(oldImages);
+
                     await _context.SaveChangesAsync();
+
+                    var postImagesList = new List<Post_Images>();
+
+                    if (postImages != null && postImages.Count > 0)
+                    {
+                        foreach (var imageFile in postImages)
+                        {
+                            if (imageFile.Length > 0)
+                            {
+                                var uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                                var imagePath = Path.Combine("wwwroot/images/PostPictures", uniqueFileName);
+
+                                using (var stream = new FileStream(imagePath, FileMode.Create))
+                                {
+                                    await imageFile.CopyToAsync(stream);
+                                }
+
+                                var postImage = new Post_Images
+                                {
+                                    Image_Path = "/images/PostPictures/" + uniqueFileName,
+                                    Post = post
+                                };
+
+                                postImagesList.Add(postImage);
+                            }
+                        }
+
+                        _context.Post_Images.AddRange(postImagesList);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {

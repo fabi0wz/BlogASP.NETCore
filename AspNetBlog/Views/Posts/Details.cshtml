@@ -10,14 +10,17 @@
 
     <main class="mt-10">
         <div class="mb-4 md:mb-0 w-full mx-auto relative">
-
-            <div class="carousel w-full"> 
+            @if (User.IsInRole("Admin") || User.Identity.Name == Model.Post.CreatedBy.UserName)
+            {
+            <a class="btn btn-outline btn-accent" asp-action="Edit" asp-route-id="@Model.Post.Post_Id">Edit</a>
+            }
+            <div class="carousel w-full">
                 @for (var i = 0; i < Model.PostImages.Count; i++)
                 {
                     var image = Model.PostImages[i];
                     var itemId = $"item{i + 1}";
                     <div id="@itemId" class="carousel-item w-full">
-                        <img src="@image.Image_Path" class="w-full" />
+                        <img src="@image.Image_Path" class="w-full"/>
                     </div>
                 }
             </div>
