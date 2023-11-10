@@ -38,6 +38,11 @@
     <_ContentIncludedByDefault Remove="Views\Posts\Details.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Posts\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Posts\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserProfile\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserProfile\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserProfile\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserProfile\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\UserProfile\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
