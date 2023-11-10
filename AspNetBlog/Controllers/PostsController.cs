@@ -48,6 +48,7 @@ namespace AspNetBlog.Controllers
             }
 
             var post = await _context.Post
+                .Include(cb => cb.CreatedBy)
                 .FirstOrDefaultAsync(m => m.Post_Id == id);
                 
             if (post == null)
