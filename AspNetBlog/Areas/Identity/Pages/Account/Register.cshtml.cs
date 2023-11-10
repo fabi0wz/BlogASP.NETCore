@@ -125,7 +125,7 @@ namespace AspNetBlog.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     //Assing User to role
-                    await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());
+                    await _userManager.AddToRoleAsync(user, Roles.User.ToString());
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -184,3 +184,4 @@ namespace AspNetBlog.Areas.Identity.Pages.Account
         }
     }
 }
+

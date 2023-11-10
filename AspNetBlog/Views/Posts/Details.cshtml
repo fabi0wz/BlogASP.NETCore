@@ -1,4 +1,5 @@
 @using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using System.Security.Claims
 @model AspNetBlog.ViewModels.PostDetailsViewModel
 
 @{
@@ -10,14 +11,17 @@
 
     <main class="mt-10">
         <div class="mb-4 md:mb-0 w-full mx-auto relative">
-
-            <div class="carousel w-full"> 
+            @if (User.IsInRole("Admin") || User.Identity.Name == Model.Post.CreatedBy.UserName)
+            {
+            <a class="btn btn-outline btn-accent" asp-action="Edit" asp-route-id="@Model.Post.Post_Id">Edit</a>
+            }
+            <div class="carousel w-full">
                 @for (var i = 0; i < Model.PostImages.Count; i++)
                 {
                     var image = Model.PostImages[i];
                     var itemId = $"item{i + 1}";
                     <div id="@itemId" class="carousel-item w-full">
-                        <img src="@image.Image_Path" class="w-full" />
+                        <img src="@image.Image_Path" class="w-full"/>
                     </div>
                 }
             </div>
@@ -32,7 +36,10 @@
             <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
                 <div class="p-4 border-t border-b md:border md:rounded">
                     <div class="flex py-2">
-                        <img src="/images/UserPictures/@Model.Post.CreatedBy.ProfilePictureUrl" class="h-10 w-10 rounded-full mr-2 object-cover" />
+                        @{
+                            string userPicture = Model.Post?.CreatedBy?.ProfilePictureUrl ?? "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png";
+                        }
+                        <img src="/images/UserPictures/@userPicture" class="h-10 w-10 rounded-full mr-2 object-cover"/>
                         <div>
                             <p class="font-semibold text-sm"> @Html.DisplayFor(model => model.Post.CreatedBy.UserName) </p>
                         </div>
@@ -52,13 +59,29 @@
                     else
                     {
                         <!-- Handle the case where objects are null -->
-                        <p>Unable to retrieve data for the button.</p>
+                        <p>User Profile was Deleted</p>
                     }
                 </div>
             </div>
 
         </div>
     </main>
+    
+    
+    @if (Model.PostUserLikes.Any(pul => pul.User.Id == User.FindFirst(ClaimTypes.NameIdentifier)?.Value))
+    {
+        @await Html.PartialAsync("~/Views/Post_User_Likes/Delete.cshtml", new Post_User_Likes()
+                   {
+                       Post = Model.Post
+                   })
+    }
+    else
+    {
+        @await Html.PartialAsync("~/Views/Post_User_Likes/Create.cshtml", new Post_User_Likes()
+           {
+               Post = Model.Post
+           })
+    }
     
 </div>
 
