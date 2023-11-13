@@ -68,7 +68,11 @@ namespace AspNetBlog.Controllers
                 .Include(pul => pul.User)
                 .Where(pul => pul.Post.Post_Id == id)
                 .ToList();
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
@@ -92,6 +96,7 @@ namespace AspNetBlog.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+<<<<<<< HEAD
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post, List<IFormFile> postImages)
 {
@@ -112,6 +117,13 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
         var postImagesList = new List<Post_Images>();
         if (postImages != null && postImages.Count > 0)
 Fabio2
+=======
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(
+            [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post,
+            List<IFormFile> postImages)
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -157,6 +169,7 @@ Fabio2
                         }
                     }
 
+<<<<<<< HEAD
                     // Add the associated Post_Images records to the context
                     _context.Post_Images.AddRange(postImagesList);
 
@@ -214,6 +227,9 @@ Fabio2
                     var postImagesList = new List<Post_Images>();
 
                     if (postImages != null && postImages.Count > 0)
+=======
+                    if (ModelState.IsValid)
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
                     {
                         foreach (var imageFile in postImages)
                         {

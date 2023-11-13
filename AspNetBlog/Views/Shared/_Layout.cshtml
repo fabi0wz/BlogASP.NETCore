@@ -21,7 +21,11 @@
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
           <li>
+<<<<<<< HEAD
             <a>Parent</a>
+=======
+            <a>Explore</a>
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
             <ul class="p-2">
               <li><a>Submenu 1</a></li>
               <li><a>Submenu 2</a></li>
@@ -30,13 +34,18 @@
           <li><a asp-area="" asp-controller="Posts" asp-action="Index">See Postss</a></li>
         </ul>
       </div>
+<<<<<<< HEAD
       <a class="btn btn-ghost normal-case text-xl">Globe Explorers</a>
+=======
+      <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-ghost normal-case text-xl">Globe Explorers</a>
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
         <li tabindex="0">
           <details>
+<<<<<<< HEAD
             <summary>Parent</summary>
             <ul class="p-2">
               <li><a>Submenu 1</a></li>
@@ -45,6 +54,19 @@
           </details>
         </li>
         <li><a asp-area="" asp-controller="Posts" asp-action="Index">See Posts</a></li>
+=======
+            <summary>Explore</summary>
+            <ul class="p-2">
+              <li><a asp-area="" asp-controller="Posts" asp-action="Create">Create Post</a></li>
+              <li><a asp-area="" asp-controller="Posts" asp-action="Index">See Posts</a></li>
+            </ul>
+          </details>
+        </li>
+        @if (User.IsInRole("Admin"))
+                  {
+                  <li><a asp-area="" asp-controller="BackOffice" asp-action="Index">Users</a></li>
+                  }
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
       </ul>
     </div>
     <div class="navbar-end">
