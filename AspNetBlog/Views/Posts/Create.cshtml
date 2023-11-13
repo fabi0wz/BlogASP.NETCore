@@ -4,65 +4,66 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white flex justify-center">Create new Post</h1>
-
+<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl flex justify-center" id="pageTitle">Create new Post</h1>
 
 <hr />
-<div class="flex justify-center mt-8 md:mx-8">
-  <div class="row">
-    <div class="col-md-4">
-      <form asp-action="Create" class="w-full max-w-lg" enctype="multipart/form-data">
-          
-        <div class="flex flex-wrap mb-6">
-          <div class="w-full md:w-1/2 lg:pr-3 mb-6 md:mb-0">
-            <label asp-for="Post_Title" class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-first-name">
-              Post Title
-            </label>
-            <input asp-for="Post_Title" class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none" id="grid-first-name" type="text" placeholder="Tailand's Finest">
-            <span asp-validation-for="Post_Title" class="text-red-500"></span>
-          </div>
-          <div class="w-full md:w-1/2 lg:pl-3">
-            <label asp-for="Post_Description" class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-last-name">
-              Post Description
-            </label>
-            <input asp-for="Post_Description" class="appearance-none block w-full border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500" id="grid-last-name" type="text" placeholder="My Trip to Tailand">
-            <span asp-validation-for="Post_Description" class="text-red-500"></span>
-          </div>
-        </div>
 
-        <div class="flex flex-wrap mb-6">
-          <div class="w-full">
-            <label asp-for="Post_Content" class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-password">
-              Post Content
-            </label>
-            <textarea asp-for="Post_Content" class="appearance-none block w-full h-64 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" id="grid-password" type="text"> </textarea>
-            <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
-            <span asp-validation-for="Post_Content" class="text-red-500"></span>
-          </div>
+<div class="flex justify-center mt-8 md:mx-8">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" class="w-full max-w-lg" enctype="multipart/form-data">
+
+                <div class="flex flex-wrap mb-6">
+                    <div class="w-full md:w-1/2 lg:pr-3 mb-6 md:mb-0">
+                        <label asp-for="Post_Title" class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-first-name">
+                            Post Title
+                        </label>
+                        <input asp-for="Post_Title" class="input-field" id="grid-first-name" type="text" placeholder="Tailand's Finest">
+                        <span asp-validation-for="Post_Title" class="text-red-500"></span>
+                    </div>
+                    <div class="w-full md:w-1/2 lg:pl-3">
+                        <label asp-for="Post_Description" class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-last-name">
+                            Post Description
+                        </label>
+                        <input asp-for="Post_Description" class="input-field" id="grid-last-name" type="text" placeholder="My Trip to Tailand">
+                        <span asp-validation-for="Post_Description" class="text-red-500"></span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap mb-6">
+                    <div class="w-full">
+                        <label asp-for="Post_Content" class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-password">
+                            Post Content
+                        </label>
+                        <textarea asp-for="Post_Content" class="input-field h-64" id="grid-password" type="text"> </textarea>
+                        <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+                        <span asp-validation-for="Post_Content" class="text-red-500"></span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap mb-2">
+                    <input id="postImages" type="file" name="postImages" class="file-input" multiple />
+
+                    <div class="alert alert-error hidden" id="Alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>You can only upload a maximum of 5 Images!</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
         </div>
-          
-        <div class="flex flex-wrap mb-2">
-          <input id="postImages" type="file" name="postImages" class="file-input file-input-bordered file-input-primary w-full max-w-xs" multiple />
-            
-          <div class="alert alert-error hidden" id="Alert">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>You can only upload a maximum of 5 Images!</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Create" class="btn btn-primary"/>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <div>
-  <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -72,29 +73,39 @@
 
         fileInput.addEventListener("change", function () {
             if (fileInput.files.length > maxFileCount) {
-              //fadeout animation 
                 alert.classList.remove("hidden");
                 alert.offsetHeight;
                 alert.classList.add("fade-out");
-              //hide the element again after the fadeout
                 setTimeout(function () {
                     alert.classList.add("hidden");
                     alert.classList.remove("fade-out");
-                }, 5000); 
+                }, 5000);
                 fileInput.value = null;
             }
         });
     });
 </script>
 
-
 <style>
-  .alert {
-    opacity: 1;
-    transition: opacity 5s;
-  }
-  /* Animation when the "fade-out" class is applied */
-  .fade-out {
-    opacity: 0;
-  }
+    .input-field {
+        appearance: none;
+        border: 1px solid #d2d6dc;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 0.375rem;
+        width: 100%;
+    }
+
+    .file-input {
+        margin-bottom: 1rem;
+    }
+
+    .alert {
+        opacity: 1;
+        transition: opacity 5s;
+    }
+
+    .fade-out {
+        opacity: 0;
+    }
 </style>
