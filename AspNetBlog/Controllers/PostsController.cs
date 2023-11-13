@@ -48,20 +48,6 @@ namespace AspNetBlog.Controllers
                 return NotFound();
             }
 
-            var postUserView = new Post_User_Views
-            {
-                // Assuming you have a method to get the Post object by Id
-                Post = _context.Post.Find(id),
-
-                // Set the User property based on authentication status
-                User = User.Identity.IsAuthenticated
-                    ? await _userManager.GetUserAsync(HttpContext.User)
-                    : null
-            };
-
-            _context.Post_User_Views.Add(postUserView);
-            await _context.SaveChangesAsync();
-
             var post = await _context.Post
                 .Include(cb => cb.CreatedBy)
                 .FirstOrDefaultAsync(m => m.Post_Id == id);
@@ -87,13 +73,13 @@ namespace AspNetBlog.Controllers
                 .Where(puv => puv.Post.Post_Id == id)
                 .Count();
             
+
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
                 PostImages = postImages,
                 PostUserComments = postUserComments,
-                PostUserLikes = postUserLikes,
-                PostUserViews = postUserViews
+                PostUserLikes = postUserLikes
             };
 
             ViewBag.CommentAnchor = commentAnchor;
@@ -130,7 +116,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
         var postImagesList = new List<Post_Images>();
         if (postImages != null && postImages.Count > 0)
         {
-            foreach (var imageFile in postImages)
+            if (User.Identity.IsAuthenticated)
             {
                 if (imageFile.Length > 0)
                 {
@@ -197,6 +183,9 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
             if (id != post.Post_Id)
             {
                 return NotFound();
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                post.CreatedBy = currentUser;
+                post.CreatedAt = DateTime.Now;
             }
 
             if (ModelState.IsValid)
