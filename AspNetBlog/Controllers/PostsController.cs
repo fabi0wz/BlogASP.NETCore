@@ -68,15 +68,7 @@ namespace AspNetBlog.Controllers
                 .Include(pul => pul.User)
                 .Where(pul => pul.Post.Post_Id == id)
                 .ToList();
-<<<<<<< HEAD
-<<<<<<< HEAD
             
-=======
-
->>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
-=======
-
->>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
@@ -100,8 +92,6 @@ namespace AspNetBlog.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-<<<<<<< HEAD
-<<<<<<< HEAD
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post, List<IFormFile> postImages)
 {
@@ -122,18 +112,6 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
         var postImagesList = new List<Post_Images>();
         if (postImages != null && postImages.Count > 0)
 Fabio2
-=======
-=======
->>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-            [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post,
-            List<IFormFile> postImages)
-<<<<<<< HEAD
->>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
-=======
->>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -179,8 +157,6 @@ Fabio2
                         }
                     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
                     // Add the associated Post_Images records to the context
                     _context.Post_Images.AddRange(postImagesList);
 
@@ -238,104 +214,6 @@ Fabio2
                     var postImagesList = new List<Post_Images>();
 
                     if (postImages != null && postImages.Count > 0)
-=======
-=======
-                    if (ModelState.IsValid)
-                    {
-                        _context.Add(post);
-
-                        // Save the new Post to the database
-                        await _context.SaveChangesAsync();
-
-                        var postImagesList = new List<Post_Images>();
-                        if (postImages != null && postImages.Count > 0)
-                        {
-                            foreach (var imageFile in postImages)
-                            {
-                                if (imageFile.Length > 0)
-                                {
-                                    // Define a unique filename for the image, e.g., using Guid
-                                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
-
-                                    // Get the path to your image folder (change to your desired folder path)
-                                    var imagePath = Path.Combine("wwwroot/images/PostPictures", uniqueFileName);
-
-                                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                                    {
-                                        await imageFile.CopyToAsync(stream);
-                                    }
-
-                                    // Create a Post_Images instance and associate it with the Post
-                                    var postImage = new Post_Images
-                                    {
-                                        Image_Path =
-                                            "/images/PostPictures/" + uniqueFileName, // Adjust the path as needed
-                                        Post = post // Associate with the new Post
-                                    };
-
-                                    // Add the Post_Images record to the list
-                                    postImagesList.Add(postImage);
-                                }
-                            }
-
-                            // Add the associated Post_Images records to the context
-                            _context.Post_Images.AddRange(postImagesList);
-
-                            // Save changes to the database to save Post_Images records
-                            await _context.SaveChangesAsync();
-                        }
-
-                        return RedirectToAction("Index");
-                    }
-
-                }
-                
-            }
-                    return View(post);
-        }
-        // GET: Posts/Edit/5
-                public async Task<IActionResult> Edit(int? id)
-                {
-                    if (id == null || _context.Post == null)
-                    {
-                        return NotFound();
-                    }
-
-                    var post = await _context.Post.FindAsync(id);
-                    if (post == null)
-                    {
-                        return NotFound();
-                    }
-
-                    return View(post);
-                }
-
-                // POST: Posts/Edit/5
-                // To protect from overposting attacks, enable the specific properties you want to bind to.
-                // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-                [HttpPost]
-                [ValidateAntiForgeryToken]
-                public async Task<IActionResult> Edit(int id,
-                    [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post,
-                    List<IFormFile> postImages)
-                {
-                    if (User.Identity.IsAuthenticated)
-                    {
-                        var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                        var lastCreatedAt = _context.Post.Where(p => p.Post_Id == id).Select(p => p.CreatedAt).FirstOrDefault();
-                        post.CreatedBy = currentUser;
-                        post.CreatedAt = lastCreatedAt;
-                        post.UpdatedAt = DateTime.Now;
-                    }
-                    
-                    if (id != post.Post_Id)
-                    {
-                        return NotFound();
-                    }
-
->>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
-                    if (ModelState.IsValid)
->>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
                     {
                         foreach (var imageFile in postImages)
                         {

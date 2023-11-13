@@ -4,14 +4,22 @@
     ViewData["Title"] = "Create";
 }
 
-<form asp-action="Create" asp-controller="Post_User_Likes">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <button class="btn">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-        </svg>
-        Like Post
-    </button>
-    @Html.HiddenFor(model => model.Post.Post_Id)
-</form>
+<h1>Create</h1>
+
+<h4>Post_User_Likes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
