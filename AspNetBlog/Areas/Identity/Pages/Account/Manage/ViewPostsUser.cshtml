@@ -15,6 +15,8 @@
         <th>Title</th>
         <th>Description</th>
         <th>Created at</th>
+        <th>Updated at</th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -33,8 +35,26 @@
           @post.Post_Description
         </td>
         <td>@post.CreatedAt</td>
+        <td>@post.UpdatedAt</td>
         <th>
           <a class="btn btn-ghost btn-xs" asp-controller="Posts" asp-action="Details" asp-route-id="@post.Post_Id">Details</a> 
+        </th>
+        <th>
+          <a class="btn btn-ghost btn-xs" onclick="@("modal" + post.Post_Id).showModal()" >Delete</a>
+              <dialog id="@("modal" + post.Post_Id)" class="modal">
+                  <div class="modal-box">
+                      <h3 class="font-bold text-lg">Delete this Post?</h3>
+                      <p class="py-4">Press no to cancel</p>
+                      <div class="modal-action">
+                          <form asp-controller="Posts" asp-action="Delete">
+                              <button asp-action="Delete" asp-route-id="@post.Post_Id" asp-controller="Posts" class="btn">Yes</button>
+                          </form>
+                          <form method="dialog">
+                              <button class="btn">No</button>
+                          </form>
+                      </div>
+                  </div>
+              </dialog>
         </th>
       </tr>
     </tbody>
