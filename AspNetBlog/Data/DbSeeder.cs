@@ -18,9 +18,9 @@ namespace AspNetBlog.Data
 
             var user = new ApplicationUser
             {
-                UserName = "admin@gmail.com",
+                UserName = "Admin",
                 Email = "admin@gmail.com",
-                Description = "blablaba",
+                Description = "Admin Account",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
