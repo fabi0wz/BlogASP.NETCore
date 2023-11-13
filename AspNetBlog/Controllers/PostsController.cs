@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AspNetBlog.Data;
 using AspNetBlog.Models;
 using AspNetBlog.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace AspNetBlog.Controllers
@@ -63,11 +64,17 @@ namespace AspNetBlog.Controllers
                 .OrderBy(puc => puc.CreatedAt)
                 .ToList();
             
+            var postUserLikes = _context.Post_User_Likes
+                .Include(pul => pul.User)
+                .Where(pul => pul.Post.Post_Id == id)
+                .ToList();
+            
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
                 PostImages = postImages,
-                PostUserComments = postUserComments
+                PostUserComments = postUserComments,
+                PostUserLikes = postUserLikes
             };
 
             ViewBag.CommentAnchor = commentAnchor;
@@ -104,46 +111,64 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
 
         var postImagesList = new List<Post_Images>();
         if (postImages != null && postImages.Count > 0)
+Fabio2
         {
-            foreach (var imageFile in postImages)
+            if (User.Identity.IsAuthenticated)
             {
-                if (imageFile.Length > 0)
-                {
-                    // Define a unique filename for the image, e.g., using Guid
-                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
-
-                    // Get the path to your image folder (change to your desired folder path)
-                    var imagePath = Path.Combine("wwwroot/images/PostPictures", uniqueFileName);
-
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await imageFile.CopyToAsync(stream);
-                    }
-
-                    // Create a Post_Images instance and associate it with the Post
-                    var postImage = new Post_Images
-                    {
-                        Image_Path = "/images/PostPictures/" + uniqueFileName, // Adjust the path as needed
-                        Post = post // Associate with the new Post
-                    };
-
-                    // Add the Post_Images record to the list
-                    postImagesList.Add(postImage);
-                }
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                post.CreatedBy = currentUser;
+                post.CreatedAt = DateTime.Now;
             }
 
-            // Add the associated Post_Images records to the context
-            _context.Post_Images.AddRange(postImagesList);
+            if (ModelState.IsValid)
+            {
+                _context.Add(post);
 
-            // Save changes to the database to save Post_Images records
-            await _context.SaveChangesAsync();
+                // Save the new Post to the database
+                await _context.SaveChangesAsync();
+
+                var postImagesList = new List<Post_Images>();
+                if (postImages != null && postImages.Count > 0)
+                {
+                    foreach (var imageFile in postImages)
+                    {
+                        if (imageFile.Length > 0)
+                        {
+                            // Define a unique filename for the image, e.g., using Guid
+                            var uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+
+                            // Get the path to your image folder (change to your desired folder path)
+                            var imagePath = Path.Combine("wwwroot/images/PostPictures", uniqueFileName);
+
+                            using (var stream = new FileStream(imagePath, FileMode.Create))
+                            {
+                                await imageFile.CopyToAsync(stream);
+                            }
+
+                            // Create a Post_Images instance and associate it with the Post
+                            var postImage = new Post_Images
+                            {
+                                Image_Path = "/images/PostPictures/" + uniqueFileName, // Adjust the path as needed
+                                Post = post // Associate with the new Post
+                            };
+
+                            // Add the Post_Images record to the list
+                            postImagesList.Add(postImage);
+                        }
+                    }
+
+                    // Add the associated Post_Images records to the context
+                    _context.Post_Images.AddRange(postImagesList);
+
+                    // Save changes to the database to save Post_Images records
+                    await _context.SaveChangesAsync();
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View(post);
         }
-
-        return RedirectToAction("Index");
-    }
-
-    return View(post);
-}
 
 
         // GET: Posts/Edit/5
