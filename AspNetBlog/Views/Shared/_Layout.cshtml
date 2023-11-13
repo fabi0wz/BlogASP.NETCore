@@ -22,6 +22,7 @@
           <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
           <li>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <a>Parent</a>
 =======
             <a>Explore</a>
@@ -39,12 +40,28 @@
 =======
       <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-ghost normal-case text-xl">Globe Explorers</a>
 >>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
+=======
+            <a>Explore</a>
+            <ul class="p-2">
+              <li><a asp-area="" asp-controller="Posts" asp-action="Create">Create Post</a></li>
+              <li><a asp-area="" asp-controller="Posts" asp-action="Index">See Posts</a></li>
+            </ul>
+          </li>
+          @if (User.IsInRole("Admin"))
+          {
+          <li><a asp-area="" asp-controller="BackOffice" asp-action="Index">Users</a></li>
+          }
+        </ul>
+      </div>
+      <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-ghost normal-case text-xl">Globe Explorers</a>
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
         <li tabindex="0">
           <details>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <summary>Parent</summary>
             <ul class="p-2">
@@ -55,6 +72,8 @@
         </li>
         <li><a asp-area="" asp-controller="Posts" asp-action="Index">See Posts</a></li>
 =======
+=======
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
             <summary>Explore</summary>
             <ul class="p-2">
               <li><a asp-area="" asp-controller="Posts" asp-action="Create">Create Post</a></li>
@@ -66,6 +85,9 @@
                   {
                   <li><a asp-area="" asp-controller="BackOffice" asp-action="Index">Users</a></li>
                   }
+<<<<<<< HEAD
+>>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
+=======
 >>>>>>> parent of cf93c98 (Some UI Improvements and final touches)
       </ul>
     </div>
