@@ -10,21 +10,11 @@ public class Post
 {
     [Key]// defines Post_Id as primary key of this table
     public int Post_Id { get; set; }
-    
     [Display(Name = "Post Title")]
-    [Required]
-    [StringLength(255)]
     public string Post_Title { get; set; }
-    
     [Display(Name = "Post Content")]
-    [Required]
-
     public string Post_Content { get; set; }
-    
-    
     [Display(Name = "Post Description")]
-    [Required]
-    [StringLength(500)]
     public string Post_Description { get; set; }
     
     [Display(Name = "Created At")]
