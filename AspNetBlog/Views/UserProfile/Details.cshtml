@@ -14,8 +14,9 @@
                     @{
                         string userPicture = Model.User.ProfilePictureUrl ?? "Default_pfp.svg.png";
                     }
-                        <img src="/images/UserPictures/@userPicture" class="w-32 h-32 rounded-full mb-4 shrink-0">
-                        <h1 class="text-xl font-bold">@Model.User.UserName</h1>
+                        
+                        <img src="/images/UserPictures/@Model.User.ProfilePictureUrl" class="w-32 h-32 rounded-full mb-4 shrink-0">
+                        <h1 class="text-xl font-bold">@Model.User.personalUserName</h1>
                         <p class="text-gray-600">@Model.User.Description</p>
                     </div>
                 </div>

@@ -14,6 +14,10 @@
                     placeholder="Write a comment..." required></textarea>
                 <span asp-validation-for="Comment" class="text-danger"></span>
                 @Html.HiddenFor(model => model.Post.Post_Id)
+                @if (Model.Post_User_Comments1 != null)
+                {
+                    @Html.HiddenFor(model => model.Post_User_Comments1.Comment_Id)
+                }
             </div>
             <button type="submit"
                 class="btn btn-primary">Post comment

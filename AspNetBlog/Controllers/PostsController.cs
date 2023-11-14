@@ -48,20 +48,6 @@ namespace AspNetBlog.Controllers
                 return NotFound();
             }
 
-            var postUserView = new Post_User_Views
-            {
-                // Assuming you have a method to get the Post object by Id
-                Post = _context.Post.Find(id),
-
-                // Set the User property based on authentication status
-                User = User.Identity.IsAuthenticated
-                    ? await _userManager.GetUserAsync(HttpContext.User)
-                    : null
-            };
-
-            _context.Post_User_Views.Add(postUserView);
-            await _context.SaveChangesAsync();
-
             var post = await _context.Post
                 .Include(cb => cb.CreatedBy)
                 .FirstOrDefaultAsync(m => m.Post_Id == id);
@@ -102,6 +88,7 @@ namespace AspNetBlog.Controllers
         }
 
         // GET: Posts/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();

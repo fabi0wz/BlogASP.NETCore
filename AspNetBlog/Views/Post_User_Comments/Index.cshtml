@@ -1,47 +1,115 @@
-@model IEnumerable<AspNetBlog.Models.Post_User_Comments>
+@model List<AspNetBlog.Models.Post_User_Comments>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@foreach (var UserComment in Model)
+            {
+                <!-- Comment Article -->
+                <article class="p-6 text-base rounded-lg bg-white dark:bg-gray-900 shadow-md mb-4">
+                    <!-- Comment Footer -->
+                    @if(UserComment.Post_User_Comments1 == null){
+                    <footer class="flex justify-between items-center mb-2">
+                        <div class="flex items-center">
+                            <p class="inline-flex items-center mr-3 text-sm text-theme-text dark:text-theme-text-reversed font-semibold">
+                                <img class="mr-2 w-6 h-6 rounded-full"
+                                     src="/images/UserPictures/@UserComment.User_Comment.ProfilePictureUrl"
+                                     alt="User Profile">
 
-<h1>Index</h1>
+                                @Html.Raw(UserComment.User_Comment.UserName != null
+                                    ? $"<span>{UserComment.User_Comment.UserName}</span>"
+                                    : "<span>Deleted User</span>")
+                            </p>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Comment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Comment_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Comment_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Comment_Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                <time pubdate datetime="@UserComment.CreatedAt.ToString("yyyy-MM-dd")"
+                                      title="@UserComment.CreatedAt.ToString("MMMM d, yyyy")">
+                                    @UserComment.CreatedAt.ToString("MMM. d, yyyy")
+                                </time>
+                            </p>
+                        </div>
+
+                        <!-- Dropdown for Comment Actions -->
+                        @if (UserComment.User_Comment.UserName == User.Identity.Name)
+                        {
+                            <details class="dropdown">
+                                <summary class="m-1 btn" id="dropdownCommentButton_@UserComment.Comment_Id">
+                                    <svg class="w-4 h-4" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         fill="currentColor" viewBox="0 0 16 3">
+                                        <path
+                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                    </svg>
+                                    <span class="sr-only">Comment settings</span>
+                                </summary>
+
+                                <!-- Dropdown Menu -->
+                                <ul class="p-2 shadow menu dropdown-content z-[1] bg-white dark:bg-gray-900 rounded-box w-52">
+                                    <li>
+                                        <a href="#"
+                                           class="hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-theme-text-reversed">Edit</a>
+                                    </li>
+                                    <li>
+                                        <button
+                                            class="hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-theme-text-reversed"
+                                            onclick="@("modal"+UserComment.Comment_Id).showModal()">Delete
+                                        </button>
+
+                                        <!-- Delete Comment Modal -->
+                                        <dialog id="@("modal"+UserComment.Comment_Id)" class="modal flex justify-center">
+                                            <div class="modal-box">
+                                                <h3 class="font-bold text-lg">
+                                                    Are you sure you want to delete this comment?
+                                                </h3>
+
+                                                <!-- Modal Action -->
+                                                <div class="modal-action">
+                                                    <form asp-action="Delete">
+                                                        <button asp-action="Delete"
+                                                                asp-route-id="@UserComment.Comment_Id"
+                                                                asp-controller="Post_User_Comments" class="btn">Yes
+                                                        </button>
+                                                        @Html.HiddenFor(model => UserComment.Post.Post_Id)
+                                                    </form>
+
+                                                    <form method="dialog">
+                                                        <button class="btn">No</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </dialog>
+                                    </li>
+                                </ul>
+                            </details>
+                        }
+                    </footer>
+
+                    <!-- Comment Content -->
+                    <p class="text-gray-700 dark:text-gray-300">@UserComment.Comment</p>
+                    }
+
+                    <!-- Comment Actions REPLY -->
+                    <div class="flex items-center mt-4 space-x-4">
+                        <button type="button" class="btn btn-link" onclick="toggleReplySection()">
+                                <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                                </svg>
+                                Reply
+                        </button>
+                        <div id="replySection" style="display: none;">
+                            @await Html.PartialAsync("~/Views/Post_User_Comments/Create.cshtml", new Post_User_Comments()
+                                   {
+                                       Post = UserComment.Post,
+                                       Post_User_Comments1 = UserComment
+                                   })
+                        </div>
+                    </div>
+                    
+                </article>
+            }
+
+<script>
+    function toggleReplySection() {
+        var replySection = document.getElementById('replySection');
+        replySection.style.display = (replySection.style.display === 'none') ? 'block' : 'none';
+    }
+</script>

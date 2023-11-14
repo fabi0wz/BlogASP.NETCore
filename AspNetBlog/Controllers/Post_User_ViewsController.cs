@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetBlog.Data;
 using AspNetBlog.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetBlog.Controllers
 {
     public class Post_User_ViewsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public Post_User_ViewsController(ApplicationDbContext context)
+        public Post_User_ViewsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Post_User_Views
@@ -158,6 +161,25 @@ namespace AspNetBlog.Controllers
         private bool Post_User_ViewsExists(int id)
         {
           return (_context.Post_User_Views?.Any(e => e.View_Id == id)).GetValueOrDefault();
+        }
+        
+        
+        public async Task<IActionResult> IncrementViewsAndRedirect(int postId)
+        {
+            var postUserView = new Post_User_Views
+            {
+                // Assuming you have a method to get the Post object by Id
+                Post = _context.Post.Find(postId),
+
+                // Set the User property based on authentication status
+                User = User.Identity.IsAuthenticated
+                    ? await _userManager.GetUserAsync(HttpContext.User)
+                    : null
+            };
+
+            _context.Post_User_Views.Add(postUserView);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Posts", new { id = postId });
         }
     }
 }
