@@ -17,9 +17,8 @@
       <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="card-body">
         <div class="form-control">
           <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-          <input asp-for="Input.Email" class="form-control w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="username" aria-required="true" placeholder="name@example.com"/>
+          <input asp-for="Input.Email" class="form-control w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" aria-required="true" placeholder="name@example.com"/>
           <label asp-for="Input.Email" class="form-label">Email</label>
-          <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
         <div class="form-control">
           <input asp-for="Input.Password" class="form-control w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="current-password" aria-required="true" placeholder="password"/>

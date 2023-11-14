@@ -32,11 +32,18 @@ namespace AspNetBlog.Data.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "Description",
                 table: "AspNetUsers",
-                type: "nvarchar(max)",
+                type: "nvarchar(100)",
+                maxLength: 100,
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "ProfilePictureUrl",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "personalUserName",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: true);
@@ -65,9 +72,9 @@ namespace AspNetBlog.Data.Migrations
                 {
                     Post_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Post_Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Post_Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Post_Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Post_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Post_Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedById = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -267,6 +274,10 @@ namespace AspNetBlog.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "ProfilePictureUrl",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "personalUserName",
                 table: "AspNetUsers");
 
             migrationBuilder.AlterColumn<string>(

@@ -24,11 +24,15 @@ namespace AspNetBlog.Controllers
         }
 
         // GET: Post_User_Comments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Post Post)
         {
-              return _context.Post_User_Comments != null ? 
-                          View(await _context.Post_User_Comments.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Post_User_Comments'  is null.");
+            var postUserComments = _context.Post_User_Comments
+                .Include(puc => puc.User_Comment)
+                .Where(puc => puc.Post.Post_Id == Post.Post_Id)
+                .OrderBy(puc => puc.CreatedAt)
+                .ToList();
+            
+            return View(postUserComments);
         }
 
         // GET: Post_User_Comments/Details/5
@@ -61,7 +65,7 @@ namespace AspNetBlog.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Comment_Id,Comment,CreatedAt,UpdatedAt,Post")] Post_User_Comments post_User_Comments)
+        public async Task<IActionResult> Create([Bind("Comment_Id, Comment,CreatedAt,UpdatedAt,Post")] Post_User_Comments post_User_Comments)
         {
             post_User_Comments.Post = await _context.Post.FindAsync(post_User_Comments.Post.Post_Id);
             post_User_Comments.User_Comment = await _userManager.GetUserAsync(User);
@@ -79,6 +83,7 @@ namespace AspNetBlog.Controllers
             return View(post_User_Comments);
         }
 
+        
         // GET: Post_User_Comments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

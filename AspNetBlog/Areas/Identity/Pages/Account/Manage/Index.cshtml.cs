@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AspNetBlog.Services;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AspNetBlog.Areas.Identity.Pages.Account.Manage
 {
@@ -63,6 +64,8 @@ namespace AspNetBlog.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            
+            public string PersonalUserName { get; set; }
             public string Description { get; set; }
             public string ProfilePictureUrl { get; set; }
             public IFormFile ImageFile { get; set; }
@@ -70,13 +73,14 @@ namespace AspNetBlog.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
+            var userName = user.personalUserName;
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
 
             Input = new InputModel
             {
+                PersonalUserName = userName,
                 PhoneNumber = phoneNumber,
                 Description = user.Description,
                 ProfilePictureUrl = user.ProfilePictureUrl
@@ -120,6 +124,23 @@ namespace AspNetBlog.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            //TESTE
+            if (!Input.PersonalUserName.IsNullOrEmpty())
+            {
+                // Assuming `user` is an instance of ApplicationUser
+                user.personalUserName = Input.PersonalUserName;
+
+                // Save the changes to the database
+                var updateResult = await _userManager.UpdateAsync(user);
+
+                if (!updateResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to update PersonalUserName.";
+                    return RedirectToPage();
+                }
+            }
+            ///////////////////
+            
             if (Input.Description != user.Description)
             {
                 user.Description = Input.Description;
