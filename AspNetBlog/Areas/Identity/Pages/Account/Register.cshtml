@@ -1,0 +1,66 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="flex">
+    <div class="w-1/2">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="p-4">
+            <h2 class="text-5xl font-bold">Create a new account.</h2>
+            <br>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input asp-for="Input.Username" class="w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="username" aria-required="true" placeholder="Username"/>
+                    <label class="text-green-500" asp-for="Input.Username">Username</label>
+                    <span asp-validation-for="Input.Username" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input asp-for="Input.Email" class="w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label class="text-green-500" asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input asp-for="Input.Password" class="w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                    <label class="text-green-500" asp-for="Input.Password">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input asp-for="Input.ConfirmPassword" class="w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                    <label class="text-green-500" asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Register</button>
+        </form>
+    </div>
+    <div class="w-1/2">
+        <section class="p-4">
+            <h1 class="text-5xl font-bold">REGISTER NOW.</h1>
+            <hr />
+            <div>
+                <p class="py-2">Welcome to a unique and exciting journey! You're about to embark on an adventure around the world, where stories of fascinating destinations, vibrant cultures, and unforgettable experiences await you.</p>
+                <p class="py-2">By registering, you become a part of our global community of travelers, where you'll share your own stories, tips, and discoveries. Together, we'll explore the world, uncover new horizons, and create memories that will last a lifetime.
+                </p>
+                <p class="py-2">
+                    So, get ready for an unforgettable voyage filled with inspiration and connection with like-minded people who share the same passion for exploring the unknown. Register now and begin your journey!
+                </p>
+            </div>
+        </section>
+        <img src="/imgs/Register/aviao.png" alt="" class="w-full h-auto">
+    </div>
+    
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

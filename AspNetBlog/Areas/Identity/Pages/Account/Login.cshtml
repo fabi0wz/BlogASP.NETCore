@@ -1,0 +1,57 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+
+
+<div class="bg-cover bg-center hero min-h-screen bg-image-url">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <h1 class="text-5xl font-bold">Login now!</h1>
+      <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+    </div>
+    <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="card-body">
+        <div class="form-control">
+          <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+          <input asp-for="Input.Email" class="form-control w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="username" aria-required="true" placeholder="name@example.com"/>
+          <label asp-for="Input.Email" class="form-label">Email</label>
+          <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-control">
+          <input asp-for="Input.Password" class="form-control w-full px-3 py-2 border rounded focus:outline-none focus:shadow-outline" autocomplete="current-password" aria-required="true" placeholder="password" />
+          <label asp-for="Input.Password" class="form-label">Password</label>
+          <span asp-validation-for="Input.Password" class="text-danger"></span>
+          
+          <label class="label">
+            <a id="forgot-password" asp-page="./ForgotPassword" class="label-text-alt link link-hover">Forgot password?</a>
+            <a class="label-text-alt link link-hover" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+          </label>
+        </div>
+        <div class="form-control">
+            <label asp-for="Input.RememberMe" class="cursor-pointer label">
+                <input class="checkbox checkbox-success" asp-for="Input.RememberMe" />
+                @Html.DisplayNameFor(m => m.Input.RememberMe)
+            </label>
+        </div>
+        <div class="form-control mt-6">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+  .bg-image-url {
+    background-image: url('./imgs/Register/aviao.png'); /* Caminho para a imagem de fundo */
+  }
+</style>
+
