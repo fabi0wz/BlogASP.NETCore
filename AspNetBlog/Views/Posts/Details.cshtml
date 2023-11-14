@@ -62,7 +62,7 @@
             <div class="p-4 border-t border-b md:border md:rounded">
                 <div class="flex py-2 items-center justify-center">
                     @{
-                        string userPicture = Model.Post?.CreatedBy?.ProfilePictureUrl ?? "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png";
+                        string userPicture = Model.Post?.CreatedBy?.ProfilePictureUrl ?? "Default_pfp.svg.png";
                     }
                     <img src="/images/UserPictures/@userPicture" class="h-10 w-10 rounded-full mr-2 object-cover" />
                     <div>
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-
+</main>
 
     <!-- Likes Section -->
     <div class="mt-8">
@@ -236,17 +236,17 @@
                     <p class="text-gray-700 dark:text-gray-300">@UserComment.Comment</p>
 
                     <!-- Comment Actions REPLY -->
-                    @* <div class="flex items-center mt-4 space-x-4"> *@
-                    @*     <button type="button" class="btn btn-link"> *@
-                    @*         <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" *@
-                    @*              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18"> *@
-                    @*             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" *@
-                    @*                   stroke-width="2" *@
-                    @*                   d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/> *@
-                    @*         </svg> *@
-                    @*         Reply *@
-                    @*     </button> *@
-                    @* </div> *@
+                     <div class="flex items-center mt-4 space-x-4"> 
+                         <button type="button" class="btn btn-link"> 
+                             <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" 
+                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18"> 
+                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
+                                       stroke-width="2" 
+                                       d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/> 
+                             </svg> 
+                             Reply 
+                         </button> 
+                     </div> 
                     
                 </article>
             }

@@ -194,6 +194,15 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Post_Id,Post_Title,Post_Content,Post_Description,CreatedAt,UpdatedAt")] Post post, List<IFormFile> postImages)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                var lastCreatedAt = _context.Post.Where(p => p.Post_Id == id).Select(p => p.CreatedAt).FirstOrDefault();
+                post.CreatedBy = currentUser;
+                post.CreatedAt = lastCreatedAt;
+                post.UpdatedAt = DateTime.Now;
+            }
+            
             if (id != post.Post_Id)
             {
                 return NotFound();
