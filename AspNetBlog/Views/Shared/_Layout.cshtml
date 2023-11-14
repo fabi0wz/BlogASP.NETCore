@@ -21,7 +21,6 @@
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
           <li>
-
             <a>Explore</a>
             <ul class="p-2">
               <li><a asp-area="" asp-controller="Posts" asp-action="Create">Create Post</a></li>
@@ -48,11 +47,11 @@
                   <li><a asp-area="" asp-controller="Posts" asp-action="Create">Create a New Post</a></li>
               }
 
+
               <li><a asp-area="" asp-controller="Posts" asp-action="Index">See Posts</a></li>
             </ul>
           </details>
         </li>
-
         @if (User.IsInRole("Admin"))
                   {
                   <li><a asp-area="" asp-controller="BackOffice" asp-action="Index">Users</a></li>

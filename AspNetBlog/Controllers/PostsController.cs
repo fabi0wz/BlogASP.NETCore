@@ -74,6 +74,7 @@ namespace AspNetBlog.Controllers
                 .Count();
             
 
+
             var viewModel = new PostDetailsViewModel
             {
                 Post = post,
@@ -88,10 +89,12 @@ namespace AspNetBlog.Controllers
         }
 
         // GET: Posts/Create
+        // GET: Posts/Create
         public IActionResult Create()
         {
             return View();
         }
+        
 
         // POST: Posts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -157,6 +160,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
 }
 
 
+
         // GET: Posts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -183,6 +187,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
             if (id != post.Post_Id)
             {
                 return NotFound();
+
                 var currentUser = await _userManager.GetUserAsync(HttpContext.User);
                 post.CreatedBy = currentUser;
                 post.CreatedAt = DateTime.Now;
@@ -203,6 +208,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
                     var postImagesList = new List<Post_Images>();
 
                     if (postImages != null && postImages.Count > 0)
+
                     {
                         foreach (var imageFile in postImages)
                         {
