@@ -1,4 +1,7 @@
-﻿@model AspNetBlog.ViewModels.BackOfficeViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@model AspNetBlog.ViewModels.BackOfficeViewModel
+@inject UserManager<ApplicationUser> UserManager
+
 
 @{
     ViewData["Title"] = "BackOffice";
@@ -15,6 +18,8 @@
             <th>Email</th>
             <th>Description</th>
             <th>PhoneNumber</th>
+            <th>Role</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -35,6 +40,26 @@
                 </td>
                 <td>@user.Description</td>
                 <td>@user.PhoneNumber</td>
+                <td>
+                    @{ string role = await UserManager.IsInRoleAsync(user, "Admin") ? "Admin" : "User"; }
+                    @role
+                </td>
+                <th>
+                    @if (UserManager.IsInRoleAsync(user, "Admin").Result)
+                    {
+                        @if (user.UserName == User.Identity.Name)
+                        {
+                            <a class="btn btn-error btn-xs" asp-action="AdminRights" asp-route-id="@user.Id" asp-controller="BackOffice" disabled>Remove Admin Rights</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-error btn-xs" asp-action="AdminRights" asp-route-id="@user.Id" asp-controller="BackOffice">Remove Admin Rights</a>
+                        }
+                    }
+                    else{
+                        <a class="btn btn-error btn-xs" asp-action="AdminRights" asp-route-id="@user.Id" asp-controller="BackOffice">Give Admin Rights</a>
+                    }
+                </th>
                 <th>
                     <a class="btn btn-ghost btn-xs" asp-controller="UserProfile" asp-action="Details" asp-route-id="@user.Id">Details</a> 
                 </th>

@@ -37,6 +37,25 @@ public class BackOffice : Controller
         };
         return View(BackOfficeViewModel);
     }
+
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> AdminRights(string id)
+    {
+      
+        var user = await _userManager.FindByIdAsync(id);
+        
+        if (await _userManager.IsInRoleAsync(user, "Admin"))
+        {
+            await _userManager.RemoveFromRoleAsync(user, "Admin");
+        }
+        else
+        {
+            await _userManager.AddToRoleAsync(user, "Admin");
+        }
+
+        // Redirect back to the page you were at
+        return RedirectToAction("Index"); // Change "Index" to the action you want to redirect to
+    }
     
     
     [HttpPost, ActionName("Delete")]

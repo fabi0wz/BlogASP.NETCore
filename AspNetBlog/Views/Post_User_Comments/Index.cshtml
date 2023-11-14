@@ -3,9 +3,8 @@
 @foreach (var UserComment in Model)
             {
                 <!-- Comment Article -->
-                <article class="p-6 text-base rounded-lg bg-white dark:bg-gray-900 shadow-md mb-4">
+                <article class="p-6 text-base rounded-lg bg-white dark:bg-gray-900 shadow-md mb-4" id="Comment_@UserComment.Comment_Id">
                     <!-- Comment Footer -->
-                    @if(UserComment.Post_User_Comments1 == null){
                     <footer class="flex justify-between items-center mb-2">
                         <div class="flex items-center">
                             <p class="inline-flex items-center mr-3 text-sm text-theme-text dark:text-theme-text-reversed font-semibold">
@@ -13,8 +12,8 @@
                                      src="/images/UserPictures/@UserComment.User_Comment.ProfilePictureUrl"
                                      alt="User Profile">
 
-                                @Html.Raw(UserComment.User_Comment.UserName != null
-                                    ? $"<span>{UserComment.User_Comment.UserName}</span>"
+                                @Html.Raw(UserComment.User_Comment.personalUserName != null
+                                    ? $"<span>{UserComment.User_Comment.personalUserName}</span>"
                                     : "<span>Deleted User</span>")
                             </p>
 
@@ -83,7 +82,6 @@
 
                     <!-- Comment Content -->
                     <p class="text-gray-700 dark:text-gray-300">@UserComment.Comment</p>
-                    }
 
                     <!-- Comment Actions REPLY -->
                     <div class="flex items-center mt-4 space-x-4">
