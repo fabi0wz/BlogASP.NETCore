@@ -5,167 +5,252 @@
 @{
     ViewData["Title"] = "Details";
 }
-<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white flex justify-center">@Html.DisplayFor(model => model.Post.Post_Title)</h1>
 
-<div class="max-w-full mx-auto">
+<div class="container mx-auto">
+    <h1 class="text-4xl font-extrabold leading-none tracking-tight text-center text-theme-text dark:text-theme-text-reversed md:text-5xl lg:text-6xl">
+        @Html.DisplayFor(model => model.Post.Post_Title)
+    </h1>
 
-    <main class="mt-10">
-        <div class="mb-4 md:mb-0 w-full mx-auto relative">
-            @if (User.IsInRole("Admin") || User.Identity.Name == Model.Post.CreatedBy.UserName)
-            {
+    <main class="mt-10"> 
+    <div class="max-w-full mx-auto mt-8 flex justify-center">
+        @if (User.IsInRole("Admin") || User.Identity.Name == Model.Post.CreatedBy.UserName)
+        {
             <a class="btn btn-outline btn-accent" asp-action="Edit" asp-route-id="@Model.Post.Post_Id">Edit</a>
-            }
-            <div class="carousel w-full">
-                @for (var i = 0; i < Model.PostImages.Count; i++)
-                {
-                    var image = Model.PostImages[i];
-                    var itemId = $"item{i + 1}";
-                    <div id="@itemId" class="carousel-item w-full">
-                        <img src="@image.Image_Path" class="w-full"/>
+        }
+    </div>
+
+    <div class="carousel-container max-w-4xl mx-auto my-8">
+        <div class="carousel mx-auto max-h-64 overflow-hidden">
+            @for (var i = 0; i < Model.PostImages.Count; i++)
+            {
+                var image = Model.PostImages[i];
+                var itemId = $"item{i + 1}";
+
+                <div id="@itemId" class="carousel-item relative w-full">
+                    <img src="@image.Image_Path" class="w-full h-full object-cover rounded-box" />
+
+                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                        @if (i == 0)
+                        {
+                            <a href="#item@Model.PostImages.Count" class="btn btn-circle">❮</a>
+                            <a href="#item@(i + 2)" class="btn btn-circle">❯</a>
+                        }
+                        else if (i == Model.PostImages.Count - 1)
+                        {
+                            <a href="#item@(i)" class="btn btn-circle">❮</a>
+                            <a href="#item1" class="btn btn-circle">❯</a>
+                        }
+                        else
+                        {
+                            <a href="#item@(i)" class="btn btn-circle">❮</a>
+                            <a href="#item@(i + 2)" class="btn btn-circle">❯</a>
+                        }
                     </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row lg:space-x-12">
+        <!-- Left Column -->
+        <div class="px-4 lg:px-0 mt-12 text-lg leading-relaxed w-full lg:w-3/4">
+            <p class="pb-6">@Html.DisplayFor(model => model.Post.Post_Content)</p>
+        </div>
+
+        <!-- Right Column -->
+        <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
+            <div class="p-4 border-t border-b md:border md:rounded">
+                <div class="flex py-2 items-center justify-center">
+                    @{
+                        string userPicture = Model.Post?.CreatedBy?.ProfilePictureUrl ?? "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png";
+                    }
+                    <img src="/images/UserPictures/@userPicture" class="h-10 w-10 rounded-full mr-2 object-cover" />
+                    <div>
+                        <p class="font-semibold text-sm">@Html.DisplayFor(model => model.Post.CreatedBy.UserName)</p>
+                    </div>
+                </div>
+
+                <p class="py-3">
+                    @Html.DisplayFor(model => model.Post.CreatedBy.Description)
+                </p>
+
+                @if (Model != null && Model.Post != null && Model.Post.CreatedBy != null)
+                {
+                    <form asp-action="Details">
+                        <button asp-controller="UserProfile" asp-action="Details" asp-route-id="@Model.Post.CreatedBy.Id"
+                                class="px-2 py-1 text-theme-text bg-theme-bg dark:bg-theme-bg-reversed flex w-full items-center justify-center rounded">
+                            Visit Profile
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <p>User Profile was Deleted</p>
                 }
             </div>
         </div>
+    </div>
 
-        <div class="flex flex-col lg:flex-row lg:space-x-12">
 
-            <div class="px-4 lg:px-0 mt-12 text-lg leading-relaxed w-full lg:w-3/4">
-                <p class="pb-6">@Html.DisplayFor(model => model.Post.Post_Content)</p>
-            </div>
-
-            <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
-                <div class="p-4 border-t border-b md:border md:rounded">
-                    <div class="flex py-2">
-                        @{
-                            string userPicture = Model.Post?.CreatedBy?.ProfilePictureUrl ?? "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png";
-                        }
-                        <img src="/images/UserPictures/@userPicture" class="h-10 w-10 rounded-full mr-2 object-cover"/>
-                        <div>
-                            <p class="font-semibold text-sm"> @Html.DisplayFor(model => model.Post.CreatedBy.UserName) </p>
-                        </div>
-                    </div>
-                    <p class="py-3">
-                        @Html.DisplayFor(model => model.Post.CreatedBy.Description)
-                    </p>
-                    @if (Model != null && Model.Post != null && Model.Post.CreatedBy != null)
-                    {
-                        <form asp-action="Details">
-                            <!-- if there is a button in form, it will close the modal -->
-                            <button asp-controller="UserProfile" asp-action="Details" asp-route-id="@Model.Post.CreatedBy.Id" class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
-                                Visit Profile
-                            </button>
-                        </form>
-                    }
-                    else
-                    {
-                        <!-- Handle the case where objects are null -->
-                        <p>User Profile was Deleted</p>
-                    }
-                </div>
-            </div>
-
+    <!-- Likes Section -->
+    <div class="mt-8">
+        <div class="stats stats-vertical lg:stats-horizontal shadow">
+          
+          <div class="stat">
+            <div class="stat-title">Views</div>
+            <div class="stat-value">@Model.PostUserViews</div>
+          </div>
+          
+          <div class="stat">
+            <div class="stat-title">Likes</div>
+            <div class="stat-value">@Model.PostUserLikes.Count()</div>
+          </div>
+            
         </div>
-    </main>
-    
-    
-    @if (Model.PostUserLikes.Any(pul => pul.User.Id == User.FindFirst(ClaimTypes.NameIdentifier)?.Value))
-    {
-        @await Html.PartialAsync("~/Views/Post_User_Likes/Delete.cshtml", new Post_User_Likes()
-                   {
-                       Post = Model.Post
-                   })
-    }
-    else
-    {
-        @await Html.PartialAsync("~/Views/Post_User_Likes/Create.cshtml", new Post_User_Likes()
-           {
-               Post = Model.Post
-           })
-    }
-    
+
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            @if (Model.PostUserLikes.Any(pul => pul.User.Id == User.FindFirst(ClaimTypes.NameIdentifier)?.Value))
+            {
+                @await Html.PartialAsync("~/Views/Post_User_Likes/Delete.cshtml", new Post_User_Likes()
+                       {
+                           Post = Model.Post
+                       })
+            }
+            else
+            {
+                @await Html.PartialAsync("~/Views/Post_User_Likes/Create.cshtml", new Post_User_Likes()
+                       {
+                           Post = Model.Post
+                       })
+            }
+        }
+        else
+        {
+            <a class="btn" asp-area="Identity" asp-page="/Account/Login">Please login to like this post.</a>
+        }
+    </div>
+
 </div>
 
-<section class=" py-8 lg:py-16 antialiased">
+<section class="py-8 lg:py-16 antialiased bg-theme-bg dark:bg-theme-bg-reversed">
     <div class="max-w-2xl mx-auto px-4">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (@Model.PostUserComments.Count())</h2>
+            <h2 class="text-lg lg:text-2xl font-bold text-theme-text dark:text-theme-text-reversed">
+                Discussion (@Model.PostUserComments.Count())
+            </h2>
         </div>
+
+        <!-- Comment Section -->
         <div class="comment-section">
             @await Html.PartialAsync("~/Views/Post_User_Comments/Create.cshtml", new Post_User_Comments()
-                   {
-                       Post = Model.Post
-                   })
-        </div>
-        <div>
-            @foreach(var UserComment in Model.PostUserComments)
             {
-                <article class="p-6 text-base rounded-lg" id="Comment_@UserComment.Comment_Id">
+                Post = Model.Post
+            })
+        </div>
+
+        <!-- Display Comments -->
+        <div>
+            @foreach (var UserComment in Model.PostUserComments)
+            {
+                <!-- Comment Article -->
+                <article class="p-6 text-base rounded-lg bg-white dark:bg-gray-900 shadow-md mb-4">
+                    <!-- Comment Footer -->
                     <footer class="flex justify-between items-center mb-2">
                         <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                                <img
-                                    class="mr-2 w-6 h-6 rounded-full"
-                                    src="/images/UserPictures/@UserComment.User_Comment.ProfilePictureUrl"
-                                    alt="Michael Gough">
-                                @Html.Raw(UserComment.User_Comment.UserName != null ? $"<span>{UserComment.User_Comment.UserName}</span>" : "<span>Deleted User</span>")
+                            <p class="inline-flex items-center mr-3 text-sm text-theme-text dark:text-theme-text-reversed font-semibold">
+                                <img class="mr-2 w-6 h-6 rounded-full"
+                                     src="/images/UserPictures/@UserComment.User_Comment.ProfilePictureUrl"
+                                     alt="User Profile">
 
+                                @Html.Raw(UserComment.User_Comment.UserName != null
+                                    ? $"<span>{UserComment.User_Comment.UserName}</span>"
+                                    : "<span>Deleted User</span>")
                             </p>
+
                             <p class="text-sm text-gray-600 dark:text-gray-400">
-                                <time pubdate datetime="@UserComment.CreatedAt.ToString("yyyy-MM-dd")" title="@UserComment.CreatedAt.ToString("MMMM d, yyyy")">@UserComment.CreatedAt.ToString("MMM. d, yyyy")</time>
+                                <time pubdate datetime="@UserComment.CreatedAt.ToString("yyyy-MM-dd")"
+                                      title="@UserComment.CreatedAt.ToString("MMMM d, yyyy")">
+                                    @UserComment.CreatedAt.ToString("MMM. d, yyyy")
+                                </time>
                             </p>
                         </div>
-                        
+
+                        <!-- Dropdown for Comment Actions -->
                         @if (UserComment.User_Comment.UserName == User.Identity.Name)
                         {
                             <details class="dropdown">
                                 <summary class="m-1 btn" id="dropdownCommentButton_@UserComment.Comment_Id">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                    <svg class="w-4 h-4" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         fill="currentColor" viewBox="0 0 16 3">
+                                        <path
+                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                                     </svg>
                                     <span class="sr-only">Comment settings</span>
                                 </summary>
-                                <!-- Dropdown menu -->
-                                <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+
+                                <!-- Dropdown Menu -->
+                                <ul class="p-2 shadow menu dropdown-content z-[1] bg-white dark:bg-gray-900 rounded-box w-52">
                                     <li>
-                                        <a href="#" class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                        <a href="#"
+                                           class="hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-theme-text-reversed">Edit</a>
                                     </li>
                                     <li>
-                                        <button class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="@("modal"+UserComment.Comment_Id).showModal()">Delete</button>
+                                        <button
+                                            class="hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-theme-text-reversed"
+                                            onclick="@("modal"+UserComment.Comment_Id).showModal()">Delete
+                                        </button>
+
+                                        <!-- Delete Comment Modal -->
                                         <dialog id="@("modal"+UserComment.Comment_Id)" class="modal flex justify-center">
-                                          <div class="modal-box">
-                                            <h3 class="font-bold text-lg">Are you sure you want to delete this comment?</h3>
-                                            <div class="modal-action">
-                                                <form asp-action="Delete">
-                                                    <!-- if there is a button in form, it will close the modal -->
-                                                    <button asp-action="Delete" asp-route-id="@UserComment.Comment_Id" asp-controller="Post_User_Comments" class="btn">Yes</button>
-                                                    @Html.HiddenFor(model => model.Post.Post_Id)
-                                                </form>
-                                                <form method="dialog">
-                                                    <!-- if there is a button in form, it will close the modal -->
-                                                    <button class="btn">No</button>
-                                                </form>
+                                            <div class="modal-box">
+                                                <h3 class="font-bold text-lg">
+                                                    Are you sure you want to delete this comment?
+                                                </h3>
+
+                                                <!-- Modal Action -->
+                                                <div class="modal-action">
+                                                    <form asp-action="Delete">
+                                                        <button asp-action="Delete"
+                                                                asp-route-id="@UserComment.Comment_Id"
+                                                                asp-controller="Post_User_Comments" class="btn">Yes
+                                                        </button>
+                                                        @Html.HiddenFor(model => model.Post.Post_Id)
+                                                    </form>
+
+                                                    <form method="dialog">
+                                                        <button class="btn">No</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                          </div>
                                         </dialog>
                                     </li>
                                 </ul>
                             </details>
                         }
                     </footer>
-                    <p class="text-gray-500 dark:text-gray-400">@UserComment.Comment</p>
-                    <div class="flex items-center mt-4 space-x-4">
-                        <button type="button"
-                                class="btn btn-link">
-                            <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-                            </svg>
-                            Reply
-                        </button>
-                    </div>
+
+                    <!-- Comment Content -->
+                    <p class="text-gray-700 dark:text-gray-300">@UserComment.Comment</p>
+
+                    <!-- Comment Actions REPLY -->
+                    @* <div class="flex items-center mt-4 space-x-4"> *@
+                    @*     <button type="button" class="btn btn-link"> *@
+                    @*         <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" *@
+                    @*              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18"> *@
+                    @*             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" *@
+                    @*                   stroke-width="2" *@
+                    @*                   d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/> *@
+                    @*         </svg> *@
+                    @*         Reply *@
+                    @*     </button> *@
+                    @* </div> *@
+                    
                 </article>
             }
         </div>
-        <!-- Repeat the article structure for other comments -->
     </div>
 </section>
 
