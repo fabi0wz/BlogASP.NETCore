@@ -116,7 +116,7 @@ public async Task<IActionResult> Create([Bind("Post_Id,Post_Title,Post_Content,P
         var postImagesList = new List<Post_Images>();
         if (postImages != null && postImages.Count > 0)
         {
-            if (User.Identity.IsAuthenticated)
+            foreach (var imageFile in postImages)
             {
                 if (imageFile.Length > 0)
                 {
